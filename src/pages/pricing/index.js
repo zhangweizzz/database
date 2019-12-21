@@ -8,7 +8,7 @@ class index extends Component {
 
     render(){
         return(
-            <div>3322  zwww</div>
+            <div>3322  </div>
         )
     }
 
