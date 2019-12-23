@@ -55,4 +55,7 @@ export default {
   'menu.dashboard.index': '定额库',
   'menu.pricing.prigcin1': '信息价',
   'menu.pricing.prigcin2': '信息价库',
+  'menu.rules.rules1': '工程量审查',
+  'menu.rules.rules2': '取费审查',
+  'menu.rules.rules3': '物料审查',
 };

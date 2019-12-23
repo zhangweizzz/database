@@ -52,4 +52,7 @@ export default {
   'menu.dashboard.index': 'index',
   'menu.pricing.prigcin1': 'prigcin1',
   'menu.pricing.prigcin2': 'prigcin2',
+  'menu.rules.rules1': 'rules1',
+  'menu.rules.rules2': 'rules2',
+  'menu.rules.rules3': 'rules3',
 };

@@ -160,9 +160,30 @@ export default {
             },
             {
               path: '/rules',
-              component: '../pages/rules/index',
+              // component: '../pages/rules/index',
               name: 'rules',
               icon: 'crown',
+              routes: [
+                {
+                  path: '/rules/index',
+                  name: 'rules1',
+                  component: '../pages/rules/index',
+                },
+                {
+                  path: '/rules/index2',
+                  name: 'rules2',
+                  component: '../pages/rules/index2',
+                },
+                {
+                  path: '/rules/index2add',
+                  component: '../pages/rules/index2add',
+                },
+                {
+                  path: '/rules/index3',
+                  name: 'rules3',
+                  component: '../pages/rules/index3',
+                },
+              ],
             },
 
             {
