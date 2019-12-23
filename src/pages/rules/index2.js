@@ -160,7 +160,12 @@ class index2 extends Component {
       flag: false,
     });
   };
+  modify2 = () => {
+    //修改
+    this.props.history.push('/rules/modify');
+  };
   creatR2 = () => {
+    //新建
     this.props.history.push('/rules/index2add');
   };
   render() {
@@ -209,7 +214,7 @@ class index2 extends Component {
               <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
                 <div className={styles.box}>费用名称:</div>
                 <div className={styles.pox}>
-                  <InputGroup size="large" compact style={{ height: '50px', width: '220px' }}>
+                  <InputGroup size="large" compact style={{ height: '50px', width: '180px' }}>
                     <Select defaultValue="请选择" style={{ width: '100%', height: '50px' }}>
                       <Option value="data1">Option1-1</Option>
                       <Option value="data2">Option1-2</Option>
@@ -220,7 +225,7 @@ class index2 extends Component {
               <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
                 <div className={styles.box}>工程类型:</div>{' '}
                 <div className={styles.pox}>
-                  <InputGroup size="large" compact style={{ height: '50px', width: '220px' }}>
+                  <InputGroup size="large" compact style={{ height: '50px', width: '180px' }}>
                     <Select defaultValue="请选择" style={{ width: '100%', height: '50px' }}>
                       <Option value="data1">Option1-1</Option>
                       <Option value="data2">Option1-2</Option>
@@ -402,9 +407,10 @@ class index2 extends Component {
               </li>
               <li>
                 <Button
-                  onClick={this.cz}
+                  onClick={this.modify2}
                   type="primary"
                   htmlType="submit"
+                  disabled={data2 == '' ? true : false}
                   style={{
                     backgroundColor: '#237F7E',
                     border: '1px solid #237F7E',

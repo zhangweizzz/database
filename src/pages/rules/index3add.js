@@ -96,11 +96,9 @@ class index2 extends Component {
       <div>
         <div className={styles.top}>
           {/* <link to="/rules/index2"> */}
-          <div className={styles.active} onClick={this.gotoindex2}>
-            取费表
-          </div>
+          {/* <div className={styles.active} onClick={this.gotoindex2}>取费表</div> */}
           {/* </link> */}
-          <div className={styles.title1}>取费规则</div>
+          <div className={styles.title1}>物料审查规则</div>
           <Breadcrumb
             style={{
               fontSize: '22px',
@@ -117,11 +115,9 @@ class index2 extends Component {
               <span>检查规则管理</span>
             </Breadcrumb.Item>
             <Breadcrumb.Item href="" style={{ color: '#FFFFFF', fontSize: '14px' }}>
-              <span>取费审查</span>
+              <span>物料审查规则</span>
             </Breadcrumb.Item>
-            <Breadcrumb.Item style={{ color: '#FDDB28', fontSize: '14px' }}>
-              取费规则新增
-            </Breadcrumb.Item>
+            <Breadcrumb.Item style={{ color: '#FDDB28', fontSize: '14px' }}>新增</Breadcrumb.Item>
           </Breadcrumb>
         </div>
         <div className={styles.content}>

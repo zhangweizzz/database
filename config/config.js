@@ -160,7 +160,6 @@ export default {
             },
             {
               path: '/rules',
-              // component: '../pages/rules/index',
               name: 'rules',
               icon: 'crown',
               routes: [
@@ -175,16 +174,30 @@ export default {
                   component: '../pages/rules/index2',
                 },
                 {
-                  path: '/rules/index2add',
+                  path: '/rules/index2add', //新建页
                   component: '../pages/rules/index2add',
+                },
+                {
+                  path: '/rules/modify', //修改页
+                  component: '../pages/rules/modify',
                 },
                 {
                   path: '/rules/index3',
                   name: 'rules3',
                   component: '../pages/rules/index3',
                 },
+                {
+                  path: '/rules/index3add', //新增页
+                  component: '../pages/rules/index3add',
+                },
               ],
             },
+            // {
+            //   path:'/manage',
+            //   name:'manage',
+            //   icon:'crown',
+            //   component:'../pages/manage'
+            // }
 
             {
               component: './404',
