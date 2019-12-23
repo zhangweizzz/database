@@ -48,6 +48,8 @@ export default {
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
-  'menu.dashboard.quota':'quota',
-  "menu.dashboard.index":'index'
+  'menu.dashboard.quota': 'quota',
+  'menu.dashboard.index': 'index',
+  'menu.pricing.prigcin1': 'prigcin1',
+  'menu.pricing.prigcin2': 'prigcin2',
 };

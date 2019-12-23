@@ -48,9 +48,11 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
-  'menu.dashboard':'定额数据',
-  'menu.pricing':'信息价管理',
-  'menu.rules':'检查规则',
-  'menu.dashboard.quota':'定额',
-  "menu.dashboard.index":"定额库"
+  'menu.dashboard': '定额数据',
+  'menu.pricing': '信息价管理',
+  'menu.rules': '检查规则',
+  'menu.dashboard.quota': '定额',
+  'menu.dashboard.index': '定额库',
+  'menu.pricing.prigcin1': '信息价',
+  'menu.pricing.prigcin2': '信息价库',
 };

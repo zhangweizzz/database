@@ -111,51 +111,60 @@ export default {
               authority: ['admin'],
             },
             {
-              path:'/dashboard',
-              name: 'dashboard',  
-             
+              path: '/dashboard',
+              name: 'dashboard',
+
               icon: 'crown',
-                  routes:[
-                   
-                    {
-                      path:'/dashboard/quota',
-                      name: 'quota',
-                      component: './dashboard/quota',
-                    },
-                    {
-                      path: "/dashboard/index",
-                      name: 'index',
-                      component: './dashboard/index',    
-                    },
-                    {
-                      path:"/dashboard/add",
-                      component: './dashboard/add'
-                    },
-                    {
-                      path:"/dashboard/amend",
-                      component: './dashboard/amend'
-                    },
-                    {
-                      path:"/dashboard/indexadd",
-                      component:"./dashboard/indexadd"
-                    }
-             
-              ]
-            
+              routes: [
+                {
+                  path: '/dashboard/quota',
+                  name: 'quota',
+                  component: './dashboard/quota',
+                },
+                {
+                  path: '/dashboard/index',
+                  name: 'index',
+                  component: './dashboard/index',
+                },
+                {
+                  path: '/dashboard/add',
+                  component: './dashboard/add',
+                },
+                {
+                  path: '/dashboard/amend',
+                  component: './dashboard/amend',
+                },
+                {
+                  path: '/dashboard/indexadd',
+                  component: './dashboard/indexadd',
+                },
+              ],
             },
             {
-              path:'/pricing',
+              path: '/pricing',
               component: '../pages/pricing/index',
               name: 'pricing',
               icon: 'crown',
+              routes: [
+                {
+                  path: '/pricing/index',
+                  name: 'prigcin1',
+                  component: '../pages/pricing/index',
+                },
+                {
+                  path: '/pricing/index2',
+                  name: 'prigcin2',
+                  component: '../pages/pricing/index2',
+                },
+              ],
             },
             {
-              path:'/rules',
+              path: '/rules',
               component: '../pages/rules/index',
               name: 'rules',
               icon: 'crown',
             },
-         
+
             {
               component: './404',
             },
@@ -166,10 +175,8 @@ export default {
         },
       ],
     },
- 
-    {
-      
-    },
+
+    {},
     {
       component: './404',
     },
