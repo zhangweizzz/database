@@ -142,7 +142,7 @@ export default {
             },
             {
               path: '/pricing',
-              component: '../pages/pricing/index',
+              // component: '../pages/pricing/index',
               name: 'pricing',
               icon: 'crown',
               routes: [
