@@ -190,14 +190,44 @@ export default {
                   path: '/rules/index3add', //新增页
                   component: '../pages/rules/index3add',
                 },
+                {
+                  path: '/rules/index3detail', //项目详情页
+                  component: '../pages/rules/index3detail',
+                },
               ],
             },
-            // {
-            //   path:'/manage',
-            //   name:'manage',
-            //   icon:'crown',
-            //   component:'../pages/manage'
-            // }
+            {
+              path: '/mine',
+              name: 'mine',
+              icon: 'crown',
+              routes: [
+                {
+                  path: '/mine/index1',
+                  name: 'mine1',
+                  component: '../pages/mine/index1',
+                },
+                {
+                  path: '/mine/index2',
+                  name: 'mine2',
+                  component: '../pages/mine/index2',
+                },
+                {
+                  path: '/mine/index3',
+                  name: 'mine3',
+                  component: '../pages/mine/index3',
+                },
+                {
+                  path: '/mine/index4',
+                  name: 'mine4',
+                  component: '../pages/mine/index4',
+                },
+                {
+                  path: '/mine/index5',
+                  name: 'mine5',
+                  component: '../pages/mine/index5',
+                },
+              ],
+            },
 
             {
               component: './404',

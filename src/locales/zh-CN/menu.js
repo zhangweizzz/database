@@ -51,6 +51,7 @@ export default {
   'menu.dashboard': '定额数据',
   'menu.pricing': '信息价管理',
   'menu.rules': '检查规则',
+  'menu.mine': '系统管理',
   'menu.dashboard.quota': '定额',
   'menu.dashboard.index': '定额库',
   'menu.pricing.prigcin1': '信息价',
@@ -58,4 +59,9 @@ export default {
   'menu.rules.rules1': '工程量审查',
   'menu.rules.rules2': '取费审查',
   'menu.rules.rules3': '物料审查',
+  'menu.mine.mine1': '系统概览',
+  'menu.mine.mine2': '用户管理',
+  'menu.mine.mine3': '权限管理',
+  'menu.mine.mine4': '字典管理',
+  'menu.mine.mine5': '费率表',
 };

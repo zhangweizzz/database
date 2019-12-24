@@ -55,4 +55,9 @@ export default {
   'menu.rules.rules1': 'rules1',
   'menu.rules.rules2': 'rules2',
   'menu.rules.rules3': 'rules3',
+  'menu.mine.mine1': 'mine1',
+  'menu.mine.mine2': 'mine2',
+  'menu.mine.mine3': 'mine3',
+  'menu.mine.mine4': 'mine4',
+  'menu.mine.mine5': 'mine5',
 };
