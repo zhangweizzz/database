@@ -14,12 +14,9 @@ import {
   Table,
   Card,
 } from 'antd';
-import styles from './index3detail.less';
+import styles from './index.less';
 
 class index extends Component {
-  back=()=>{
-    history.go(-1)
-  }
   render() {
     const { Meta } = Card;
     return (

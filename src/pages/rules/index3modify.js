@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { link } from 'react-router-dom';
 import { connect } from 'dva';
 import {
   Row,
@@ -13,8 +12,9 @@ import {
   InputNumber,
   Button,
   Table,
+  Radio,
 } from 'antd';
-import styles from './index2add.less';
+import styles from './modify.less';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
@@ -84,9 +84,16 @@ class index2 extends Component {
     super();
     this.state = {
       flag: true,
+      value: 1,
     };
   }
 
+  onChange = e => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value: e.target.value,
+    });
+  };
   gotoindex2 = () => {
     this.props.history.push('/rules/index2');
   };
@@ -95,12 +102,13 @@ class index2 extends Component {
   }
   render() {
     const { flag } = this.state;
+
     return (
       <div>
         <div className={styles.top}>
-          {/* <link to="/rules/index2"> */}
-          {/* <div className={styles.active} onClick={this.gotoindex2}>取费表</div> */}
-          {/* </link> */}
+          {/* <div className={styles.active} onClick={this.gotoindex2}>
+            取费表
+          </div> */}
           <div className={styles.title1}>物料审查规则</div>
           <Breadcrumb
             style={{
@@ -120,46 +128,77 @@ class index2 extends Component {
             <Breadcrumb.Item href="" style={{ color: '#FFFFFF', fontSize: '14px' }}>
               <span>物料审查规则</span>
             </Breadcrumb.Item>
-            <Breadcrumb.Item style={{ color: '#FDDB28', fontSize: '14px' }}>新增</Breadcrumb.Item>
+            <Breadcrumb.Item style={{ color: '#FDDB28', fontSize: '14px' }}>
+              修改
+            </Breadcrumb.Item>
           </Breadcrumb>
         </div>
         <div className={styles.content}>
           <div className={styles.bt}>
             {' '}
-            <p className={styles.contentp}></p> <h2>新增 :</h2>
+            <p className={styles.contentp}></p> <h2>修改 :</h2>
           </div>
           <Row>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-              <div className={styles.box}>规则编号:</div>{' '}
+            <Col xs={{ span: 4, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <div className={styles.box}>物料编号:</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-              <div className={styles.box}>费用名称:</div>{' '}
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <div className={styles.box}>物料名称:</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-              <div className={styles.box}>费用基础:</div>{' '}
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <div className={styles.box}>单位:</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-              <div className={styles.box}>费&emsp;&emsp;率:</div>{' '}
+
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <div className={styles.box}>单价(含税):</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-              <div className={styles.box}>计&nbsp;算&nbsp;式:</div>{' '}
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <div className={styles.box}>单价:</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <div className={styles.box}>是否常见物料:</div>{' '}
+              <div className={styles.pox}>
+                <Radio.Group onChange={this.onChange} value={this.state.value}>
+                  <Radio value={1}>是</Radio>
+                  <Radio value={2}>否</Radio>
+                </Radio.Group>
+              </div>
+            </Col>
+            
           </Row>
+          <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <div className={styles.box}>物料状态:</div>{' '}
+              <div className={styles.pox}>
+                <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
+              </div>
+            </Col>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <div className={styles.box}>有效期限:</div>{' '}
+              <div className={styles.pox}>
+                <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
+              </div>
+            </Col>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <div className={styles.box}>关联项目:</div>{' '}
+              <div className={styles.pox}>
+                <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
+              </div>
+            </Col>
           <ul className={styles.btn}>
             <li>
               <Button

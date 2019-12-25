@@ -117,6 +117,9 @@ class index3 extends Component {
   gotocreate = () => {
     this.props.history.push('/rules/index3add');
   };
+  gotoIndex3Modify = () => {
+    this.props.history.push('/rules/index3modify');
+  };
   render() {
     const { flag } = this.state;
 
@@ -152,31 +155,31 @@ class index3 extends Component {
             <p className={styles.contentp}></p> <h2>条件查询 :</h2>
           </div>
           <Row>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
               <div className={styles.box}>物料编号:</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
               <div className={styles.box}>物料名称:</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
               <div className={styles.box}>单价(含税):</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
               <div className={styles.box}>单&emsp;&emsp;价:</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
               <div className={styles.box}>是否常见物料:</div>{' '}
               <div className={styles.pox}>
                 <Radio.Group onChange={this.onChange} value={this.state.value}>
@@ -185,7 +188,7 @@ class index3 extends Component {
                 </Radio.Group>
               </div>
             </Col>
-            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
               <div className={styles.box}>有效期限:</div>
               <div className={styles.pox}>
                 <InputGroup size="large" compact style={{ height: '50px', width: '220px' }}>
@@ -196,7 +199,7 @@ class index3 extends Component {
                 </InputGroup>
               </div>
             </Col>
-            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
               <div className={styles.box}>结束期限:</div>
               <div className={styles.pox}>
                 <InputGroup size="large" compact style={{ height: '50px', width: '220px' }}>
@@ -264,6 +267,7 @@ class index3 extends Component {
                   height: '80%',
                   width: '100%',
                 }}
+                onClick={this.gotoIndex3Modify}
               >
                 修改
               </Button>
