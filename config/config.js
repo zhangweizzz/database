@@ -156,6 +156,14 @@ export default {
                   name: 'prigcin2',
                   component: '../pages/pricing/index2',
                 },
+                {
+                  path: '/pricing/index2modify',
+                  component: '../pages/pricing/index2modify',
+                },
+                {
+                  path: '/pricing/index2add',
+                  component: '../pages/pricing/index2add',
+                },
               ],
             },
             {
@@ -193,6 +201,24 @@ export default {
                 {
                   path: '/rules/index3detail', //项目详情页
                   component: '../pages/rules/index3detail',
+                },
+              ],
+            },
+
+            {
+              path: '/examination',
+              name: 'examination',
+              icon: 'crown',
+              routes: [
+                {
+                  path: '/examination/index',
+                  name: 'examination1',
+                  component: './examination/index',
+                },
+                {
+                  path: '/examination/detail',
+                  name: 'examinationdetail',
+                  component: './examination/detail',
                 },
               ],
             },
@@ -245,9 +271,15 @@ export default {
       component: './404',
     },
   ],
-  // Theme for antd: https://ant.design/docs/react/customize-theme-cn
+
   theme: {
     // ...darkTheme,
+    'font-size-base': '14px',
+    'badge-font-size': '12px',
+    'btn-font-size-lg': '@font-size-base',
+    'menu-dark-bg': '#2F9290',
+    'menu-dark-submenu-bg': '#2F9290',
+    'layout-sider-background': '#2F9290',
   },
   define: {
     ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION:

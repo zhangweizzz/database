@@ -21,6 +21,12 @@ const InputGroup = Input.Group;
 const { Option } = Select;
 
 class index2 extends Component {
+  gotoPricing2 = () => {
+    this.props.history.push('/pricing/index2modify');
+  };
+  gotoPricingAdd = () => {
+    this.props.history.push('/pricing/index2add');
+  };
   render() {
     const columns = [
       {
@@ -74,26 +80,6 @@ class index2 extends Component {
         address: 'London No. 1 Lake Park',
         project: '国家电网',
       },
-      {
-        key: '3',
-        id: 'A001',
-        name: 'Joe Black',
-        year: '2019',
-        quarter: '第四季',
-        type: 32,
-        address: 'Sidney No. 1 Lake Park',
-        project: '国家电网',
-      },
-      {
-        key: '4',
-        id: 'A001',
-        name: 'Disabled User',
-        year: '2019',
-        quarter: '第四季',
-        type: 99,
-        address: 'Sidney No. 1 Lake Park',
-        project: '国家电网',
-      },
     ];
 
     // rowSelection objects indicates the need for row selection
@@ -108,6 +94,7 @@ class index2 extends Component {
         console.log(selected, selectedRows, changeRows);
       },
     };
+
     return (
       <div>
         <div className={styles.top}>
@@ -234,6 +221,7 @@ class index2 extends Component {
                   height: '80%',
                   width: '100%',
                 }}
+                onClick={this.gotoPricingAdd}
               >
                 新增
               </Button>
@@ -248,6 +236,7 @@ class index2 extends Component {
                   height: '80%',
                   width: '100%',
                 }}
+                onClick={this.gotoPricing2}
               >
                 修改
               </Button>
