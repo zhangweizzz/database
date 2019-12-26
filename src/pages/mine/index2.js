@@ -1,3 +1,4 @@
+//用户管理
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import {
@@ -109,6 +110,9 @@ class index3 extends Component {
   gotocreate = () => {
     this.props.history.push('/rules/index3add');
   };
+  back=()=>{
+    this.props.history.go(-1);
+  }
   render() {
     const { flag } = this.state;
 
@@ -218,6 +222,7 @@ class index3 extends Component {
               marginLeft: '90%',
               marginBottom: '2%',
             }}
+            onClick={this.back}
           >
             返回
           </Button>

@@ -203,6 +203,10 @@ export default {
                   component: '../pages/rules/index2',
                 },
                 {
+                  path: '/rules/index2detail', //index2项目详情页
+                  component: '../pages/rules/index2detail',
+                },
+                {
                   path: '/rules/index2add', //新建页
                   component: '../pages/rules/index2add',
                 },
@@ -220,7 +224,7 @@ export default {
                   component: '../pages/rules/index3add',
                 },
                 {
-                  path: '/rules/index3detail', //项目详情页
+                  path: '/rules/index3detail', //index3项目详情页
                   component: '../pages/rules/index3detail',
                 },
                 {
@@ -256,6 +260,10 @@ export default {
                   path: '/mine/index1',
                   name: 'mine1',
                   component: '../pages/mine/index1',
+                },
+                {
+                  path: '/mine/systemLog',//系统日志管理
+                  component: '../pages/mine/systemLog',
                 },
                 {
                   path: '/mine/index2',

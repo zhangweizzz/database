@@ -109,7 +109,7 @@ class index2 extends Component {
           {/* <div className={styles.active} onClick={this.gotoindex2}>
             取费表
           </div> */}
-          <div className={styles.title1}>物料审查规则</div>
+          <div className={styles.active}>物料审查规则</div>
           <Breadcrumb
             style={{
               fontSize: '22px',

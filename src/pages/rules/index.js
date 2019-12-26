@@ -73,7 +73,7 @@ const data = [
     zt: 'online'
   },
   {
-    key: '1',
+    key: '2',
     bh: '1',
     mc: '名称',
     lx: '类型',
@@ -155,9 +155,14 @@ const data2 = [
     cp: '关联项目',
   },
 ];
+var check = 0;
+var checkContent=[];
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    check = selectedRowKeys;
+    checkContent=selectedRows
+    
   },
   getCheckboxProps: record => ({
     disabled: record.name === 'Disabled User', // Column configuration not to be checked
@@ -187,19 +192,18 @@ class index2 extends Component {
       flag: false,
     });
   };
-  modify2 = () => {
-    //修改
-    this.props.history.push('/rules/modify');
-  };
-  creatR2 = () => {
-    //新建
-    this.props.history.push('/rules/index2add');
-  };
   add = () => {//工程量审查新增
     this.props.history.push('/rules/indexadd');
   }
   modify = () => {//工程量审查修改
+    console.log(check);
+   if(check=='0'||check==""){
+     confirm("请选择你想修改的项目")
+   }else if(check.length>1){
+     confirm("一次只能修改一个项目，谢谢")
+   }else{
     this.props.history.push('/rules/indexmodify');
+   }
   }
   addGC2 = () => {//工程规则新增
     this.props.history.push('/rules/indexaddGC');
@@ -339,7 +343,6 @@ class index2 extends Component {
                   新建
                 </Button>
               </li>
-
               <li>
                 <Button
                   type="primary"
@@ -351,6 +354,7 @@ class index2 extends Component {
                     width: '100%',
                   }}
                   onClick={this.modify}
+                  disabled={!data}
                 >
                   修改
                 </Button>
@@ -557,6 +561,7 @@ class index2 extends Component {
                     height: '80%',
                     width: '100%',
                   }}
+                  disabled={!data2}
                 >
                   修改
                 </Button>

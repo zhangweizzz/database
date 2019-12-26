@@ -1,3 +1,4 @@
+//数据字典管理
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import {
@@ -12,17 +13,100 @@ import {
   InputNumber,
   Button,
   Table,
-  Card,
+  Radio,
 } from 'antd';
 import styles from './index4.less';
 
-class index extends Component {
+const InputGroup = Input.Group;
+const { Option } = Select;
+
+const columns = [
+  {
+    title: '序号',
+    dataIndex: 'bh',
+  },
+  {
+    title: '字典类型名称',
+    dataIndex: 'mc',
+  },
+  {
+    title: '字典类型代码',
+    dataIndex: 'dw',
+  },
+  {
+    title: '操作',
+    dataIndex: 'djhs',
+  }
+];
+const data = [
+  {
+    key: '1',
+    bh: '1',
+    mc: '名称',
+    lx: '类型',
+    bz: '是',
+    dw: '中天弘信',
+    djhs: 65
+  },
+  {
+    key: '2',
+    bh: '1',
+    mc: '名称',
+    lx: '类型',
+    bz: '是',
+    dw: '中天弘信',
+    djhs: 65
+  },
+];
+// const rowSelection = {
+//   onChange: (selectedRowKeys, selectedRows) => {
+//     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+//   },
+//   getCheckboxProps: record => ({
+//     disabled: record.name === 'Disabled User', // Column configuration not to be checked
+//     name: record.name,
+//   }),
+// };
+// function handleChange(value) {
+//   console.log(`selected ${value}`);
+// }
+class index3 extends Component {
+  constructor() {
+    super();
+    this.state = {
+      flag: true,
+      value: 1,
+    };
+  }
+
+  handleChange=(value)=> {
+    console.log(`selected ${value}`);
+  }
+
+  onChange = e => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value: e.target.value,
+    });
+  };
+  gotoindex2 = () => {
+    this.props.history.push('/rules/index2');
+  };
+  gotocreate = () => {
+    this.props.history.push('/rules/index3add');
+  };
+  back = () => {
+    this.props.history.go(-1);
+  }
   render() {
-    const { Meta } = Card;
+    const { flag } = this.state;
+
     return (
       <div>
-        {/* 头部导航 */}
         <div className={styles.top}>
+          <div className={styles.active} onClick={this.gotoindex2}>
+            数据字典管理
+          </div>
           <Breadcrumb
             style={{
               fontSize: '22px',
@@ -36,57 +120,58 @@ class index extends Component {
               <span>首页</span>
             </Breadcrumb.Item>
             <Breadcrumb.Item href="" style={{ color: '#FFFFFF', fontSize: '14px' }}>
-              <span style={{ color: '#FDDB28' }}>检查规则管理</span>
+              <span>系统管理</span>
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="" style={{ color: '#FDDB28', fontSize: '14px' }}>
+              <span>数据字典管理</span>
             </Breadcrumb.Item>
           </Breadcrumb>
         </div>
         <div className={styles.content}>
-          <div style={{ marginRight: 40 }} className={styles.box1}>
-            <Card
-              hoverable
-              style={{ width: 180, height: 132 }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              }
-            >
-              <Meta title="工程量审查" description="www.instagram.com" />
-            </Card>
+          {/* 左边盒子 */}
+          <div style={{ width: '45%' }}>
+            <Button style={{ marginBottom: 15 }}>新建</Button>
+            <Table
+              columns={columns}
+              dataSource={data}
+              bordered
+              pagination={false}
+              style={{ width: '90%' }}
+            />
           </div>
-          <div style={{ marginRight: 40 }} className={styles.box1}>
-            <Card
-              hoverable
-              style={{ width: 180, height: 132 }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              }
-            >
-              <Meta title="取费审查" description="www.instagram.com" />
-            </Card>
+          {/* 右边盒子 */}
+          <div style={{ width: '45%' }}>
+            <div className={styles.pox} style={{ display: 'flex', marginBottom: 15 }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{
+                  backgroundColor: '#237F7E',
+                  border: '1px solid #237F7E',
+                  height: '32px',
+                  width: '74px',
+                  marginLeft: 0
+                }}
+              >新建</Button>
+              <Select defaultValue="lucy" style={{ width: '50%',marginLeft:'5%' }} onChange={this.handleChange}>
+                <Option value="1">Jack</Option>
+                <Option value="2">Lucy</Option>       
+                <Option value="3">yimi</Option>
+              </Select>
+            </div>
+            <Table
+              columns={columns}
+              dataSource={data}
+              bordered
+              pagination={false}
+              style={{ width: '90%' }}
+            />
           </div>
-          <div style={{ marginRight: 40 }} className={styles.box1}>
-            <Card
-              hoverable
-              style={{ width: 180, height: 132 }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              }
-            >
-              <Meta title="物料审查" description="www.instagram.com" />
-            </Card>
-          </div>
+
         </div>
       </div>
     );
   }
 }
 
-export default index;
+export default index3;

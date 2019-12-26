@@ -1,4 +1,3 @@
-//取费审查
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import {
@@ -14,47 +13,130 @@ import {
   Button,
   Table,
 } from 'antd';
-import styles from './index2.less';
+import styles from './index2detail.less';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
-
 const columns = [
   {
+    title: '',
+    dataIndex: 'j',
+    key: 'j',
+    width: '2%'
+  },
+  // {
+  //   title: '序号',
+  //   dataIndex: 'id',
+  //   key: 'id',
+  //   width: '5%',
+  //   // render: (text) => <a href="/rules/index2detail">{text}</a>
+  // },
+  {
     title: '费用名称',
-    dataIndex: 'mc',
-    render: (text) => <a href="/rules/index2detail">{text}</a>
+    dataIndex: 'name',
+    key: 'name',
+    width: '24%',
   },
   {
-    title: '工程类型',
-    dataIndex: 'lx',
+    title: '代码',
+    dataIndex: 'age',
+    key: 'age',
+    width: '5%',
+  },
+  {
+    title: '取费基数',
+    dataIndex: 'address',
+    width: '10%',
+    key: 'address',
+  },
+  {
+    title: '费率',
+    dataIndex: 'fl',
+    width: '10%',
+    key: 'fl',
+  },
+  {
+    title: '单位',
+    dataIndex: 'dw',
+    width: '10%',
+    key: 'dw',
+  },
+  {
+    title: '价格',
+    dataIndex: 'money',
+    width: '10%',
+    key: 'money',
   },
   {
     title: '备注',
     dataIndex: 'bz',
+    width: '26%',
+    key: 'bz',
   },
 ];
+
 const data = [
   {
-    key: '1',
-    bh: '1',
-    mc: '名称',
-    lx: '类型',
-    bz: '是',
+    key: 1,
+    name: 'John Brown sr.',
+    age: 60,
+    address: '啦啦啦啦啦啦',
+    children: [
+      {
+        key: 11,
+        name: 'John Brown',
+        age: 42,
+        address: '啦啦啦啦啦啦',
+      },
+      {
+        key: 12,
+        name: 'John Brown jr.',
+        age: 30,
+        address: '啦啦啦啦啦啦',
+        children: [
+          {
+            key: 121,
+            name: 'Jimmy Brown',
+            age: 16,
+            address: '啦啦啦啦啦啦',
+          },
+        ],
+      },
+      {
+        key: 13,
+        name: 'Jim Green sr.',
+        age: 72,
+        address: 'London No. 1 Lake Park',
+        children: [
+          {
+            key: 131,
+            name: 'Jim Green',
+            age: 42,
+            address: 'London No. 2 Lake Park',
+            children: [
+              {
+                key: 1311,
+                name: 'Jim Green jr.',
+                age: 25,
+                address: 'London No. 3 Lake Park',
+              },
+              {
+                key: 1312,
+                name: 'Jimmy Green sr.',
+                age: 18,
+                address: 'London No. 4 Lake Park',
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
-    key: '2',
-    bh: '1',
-    mc: '名称',
-    lx: '类型',
-    bz: '是',
-  },
-  {
-    key: '3',
-    bh: '1',
-    mc: '名称',
-    lx: '类型',
-    bz: '是',
+    key: 2,
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
   },
 ];
 
@@ -132,11 +214,11 @@ class index2 extends Component {
       flag: false,
     });
   };
-  // index2modify = () => {
-  //   //修改
-  //   this.props.history.push('/rules/index2modify');
-  // };
-  index2add = () => {
+  modify2 = () => {
+    //修改
+    this.props.history.push('/rules/modify');
+  };
+  creatR2 = () => {
     //新建
     this.props.history.push('/rules/index2add');
   };
@@ -171,135 +253,17 @@ class index2 extends Component {
               <span>取费审查</span>
             </Breadcrumb.Item>
             <Breadcrumb.Item style={{ color: '#FDDB28', fontSize: '14px' }}>
-              {flag ? '取费表' : '取费规则'}
+              {flag ? '取费表详情' : '取费规则'}
             </Breadcrumb.Item>
           </Breadcrumb>
         </div>
-        {/* 取费表 */}
+        {/* 取费表详情 */}
         {flag && (
-          <div className={styles.content}>
-            <div className={styles.bt}>
-              {' '}
-              <p className={styles.contentp}></p> <h2>条件查询 :</h2>
-            </div>
-            <Row>
-              <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-                <div className={styles.box}>费用名称:</div>
-                <div className={styles.pox}>
-                  <InputGroup size="large" compact style={{ height: '50px', width: '180px' }}>
-                    <Select defaultValue="请选择" style={{ width: '100%', height: '50px' }}>
-                      <Option value="data1">Option1-1</Option>
-                      <Option value="data2">Option1-2</Option>
-                    </Select>
-                  </InputGroup>
-                </div>
-              </Col>
-              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-                <div className={styles.box}>工程类型:</div>{' '}
-                <div className={styles.pox}>
-                  <InputGroup size="large" compact style={{ height: '50px', width: '180px' }}>
-                    <Select defaultValue="请选择" style={{ width: '100%', height: '50px' }}>
-                      <Option value="data1">Option1-1</Option>
-                      <Option value="data2">Option1-2</Option>
-                    </Select>
-                  </InputGroup>
-                </div>
-              </Col>
-            </Row>
-            <ul className={styles.btn}>
-              <li>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{
-                    backgroundColor: '#237F7E',
-                    border: '1px solid #237F7E',
-                    height: '80%',
-                    width: '100%',
-                  }}
-                >
-                  查询
-                </Button>
-              </li>
-              <li>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{
-                    backgroundColor: '#237F7E',
-                    border: '1px solid #237F7E',
-                    height: '80%',
-                    width: '100%',
-                  }}
-                >
-                  重置
-                </Button>
-              </li>
-              <li>
-                <Button
-                  onClick={this.index2add}
-                  type="primary"
-                  htmlType="submit"
-                  style={{
-                    backgroundColor: '#237F7E',
-                    border: '1px solid #237F7E',
-                    height: '80%',
-                    width: '100%',
-                  }}
-                >
-                  新建
-                </Button>
-              </li>
-              <li>
-                <Button
-                  onClick={this.cz}
-                  type="primary"
-                  htmlType="submit"
-                  style={{
-                    backgroundColor: '#237F7E',
-                    border: '1px solid #237F7E',
-                    height: '80%',
-                    width: '100%',
-                  }}
-                >
-                  导入
-                </Button>
-              </li>
-              <li>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{
-                    backgroundColor: '#237F7E',
-                    border: '1px solid #237F7E',
-                    height: '80%',
-                    width: '100%',
-                  }}
-                >
-                  导出
-                </Button>
-              </li>
-              <li>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{
-                    backgroundColor: '#237F7E',
-                    border: '1px solid #237F7E',
-                    height: '80%',
-                    width: '100%',
-                  }}
-                >
-                  删除
-                </Button>
-              </li>
-            </ul>
+          <div className={styles.content}>            
             <Table
-              rowSelection={rowSelection}
               columns={columns}
               dataSource={data}
               bordered
-              style={{ marginTop: '50px' }}
             />
           </div>
         )}
@@ -348,6 +312,7 @@ class index2 extends Component {
               </li>
               <li>
                 <Button
+                  onClick={this.creatR2}
                   type="primary"
                   htmlType="submit"
                   style={{

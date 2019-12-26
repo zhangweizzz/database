@@ -1,3 +1,4 @@
+//系统概览
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import {
@@ -69,26 +70,22 @@ class index1 extends Component {
     super();
     this.state = {
       flag: true,
+      bottom:'bottom'
     };
   }
-  // card1 = () => {
-  //   this.setState({
-  //     flag: true,
-  //   });
-  // };
-  // card2 = () => {
-  //   this.setState({
-  //     flag: false,
-  //   });
-  // };
-  modify2 = () => {
-    //修改
-    this.props.history.push('/rules/modify');
-  };
-  creatR2 = () => {
-    //新建
-    this.props.history.push('/rules/index2add');
-  };
+  
+  MyAccount=()=>{
+    this.props.history.push('/mine/index2')//用户账户管理
+  }
+  MyRoot=()=>{
+    this.props.history.push('/mine/index3')//用户权限管理
+  }
+  Dictionaries=()=>{
+    this.props.history.push('/mine/index4')//数据字典管理
+  }
+  systemLog=()=>{
+    this.props.history.push('/mine/systemLog')//系统日志管理
+  }
   render() {
     const { flag } = this.state;
 
@@ -143,12 +140,11 @@ class index1 extends Component {
                     color: 'white',
                   }}
                 >
-                  <div style={{ display: 'flex' }}>
+                  <div style={{ display: 'flex',justifyContent:'space-around' }}>
                     <div className={styles.litterBox}>
                       <p>用户账户管理</p>
                       <img
-                        src={[require('../../assets/yuechu.png')]}
-                        style={{ marginBottom: 34, marginLeft: 10 }}
+                        src={[require('../../assets/user01.png')]}
                       />
                       <Button
                         style={{
@@ -156,46 +152,59 @@ class index1 extends Component {
                           width: '110px',
                           height: '30px',
                         }}
+                        onClick={this.MyAccount}
                       >
                         管理
                       </Button>
                     </div>
-                    <div className={styles.litterBox} style={{ backgroundColor: '#E6F7FF' }}>
+                    <div className={styles.litterBox}>
                       <p>用户权限管理</p>
                       <img
-                        src={[require('../../assets/yuechu.png')]}
-                        style={{ marginBottom: 34, marginLeft: 10 }}
+                        src={[require('../../assets/user02.png')]}
                       />
                       <Button
-                        style={{ backgroundColor: '#4288AA', width: '110px', height: '30px' }}
+                        style={{
+                          backgroundColor: '#4288AA',
+                          width: '110px',
+                          height: '30px',
+                        }}
+                        onClick={this.MyRoot}
                       >
                         管理
                       </Button>
                     </div>
-                    <div className={styles.litterBox} style={{ backgroundColor: '#FFFADC' }}>
+                    <div className={styles.litterBox}>
                       <p>数据字典管理</p>
                       <img
-                        src={[require('../../assets/yuechu.png')]}
-                        style={{ marginBottom: 34, marginLeft: 10 }}
+                        src={[require('../../assets/user03.png')]}
                       />
                       <Button
-                        style={{ backgroundColor: '#FCE24B', width: '110px', height: '30px' }}
+                        style={{
+                          backgroundColor: '#FCE24B',
+                          width: '110px',
+                          height: '30px',
+                        }}
+                        onClick={this.Dictionaries}
                       >
                         管理
                       </Button>
                     </div>
-                    <div className={styles.litterBox} style={{ backgroundColor: '#F9FBE5' }}>
+                    <div className={styles.litterBox}>
                       <p>系统日志管理</p>
                       <img
-                        src={[require('../../assets/yuechu.png')]}
-                        style={{ marginBottom: 34, marginLeft: 10 }}
+                        src={[require('../../assets/user04.png')]}
                       />
                       <Button
-                        style={{ backgroundColor: '#FE9E4D', width: '110px', height: '30px' }}
+                        style={{
+                          backgroundColor: '#FE9E4D',
+                          width: '110px',
+                          height: '30px',
+                        }}
+                        onClick={this.systemLog}
                       >
                         管理
                       </Button>
-                    </div>
+                    </div>                    
                   </div>
                 </Card>
               </Col>
@@ -208,7 +217,7 @@ class index1 extends Component {
           </div>
           <div className={styles.box4}>
             <Row gutter={10}>
-              <Col>
+              {/* <Col>
                 <Card
                   title="操作记录"
                   style={{ borderRadius: '20px', height: 40 }}
@@ -219,10 +228,10 @@ class index1 extends Component {
                     height: 40,
                     color: 'white',
                   }}
-                >
-                  <Table columns={columns} dataSource={data} bordered />
-                </Card>
-              </Col>
+                > */}
+                  <Table columns={columns} dataSource={data} bordered/>
+                {/* </Card>
+              </Col> */}
             </Row>
           </div>
         </div>

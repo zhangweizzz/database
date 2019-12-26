@@ -12,8 +12,10 @@ import {
   InputNumber,
   Button,
   Table,
+  Radio,
+  Checkbox
 } from 'antd';
-import styles from './indexadd.less';
+import styles from './indexmodify.less';
 import { normalizeUnits } from 'moment';
 
 const InputGroup = Input.Group;
@@ -148,6 +150,9 @@ class index2 extends Component {
     super();
     this.state = {
       flag: true,
+      value: 1,
+      one: false,
+      two: false
     };
   }
   card1 = () => {
@@ -171,8 +176,27 @@ class index2 extends Component {
   back=()=>{
     history.go(-1)
   }
+  handleChange = (value) => {
+    console.log(`selected ${value}`);
+    if (value == 'data2') {//单个定额
+      this.setState({
+        one: true,//显示
+        two:false
+      })
+    } else if (value == 'data3') {//局部定额
+      this.setState({
+        one: false,
+        two: true//显示
+      })
+    } else {
+      this.setState({
+        one: false,//显示
+        two: false
+      })
+    }
+  }
   render() {
-    const { flag } = this.state;
+    const { flag, one, two } = this.state;
 
     return (
       <div>
@@ -206,7 +230,7 @@ class index2 extends Component {
             </Breadcrumb.Item>
           </Breadcrumb>
         </div>
-        {/* 取费表 */}
+        {/* 工程量审查修改表 */}
         {flag && (
           <div className={styles.content}>
             <div className={styles.bt}>
@@ -214,82 +238,153 @@ class index2 extends Component {
               <p className={styles.contentp}></p> <h2>条件查询 :</h2>
             </div>
             <Row>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
-              <div className={styles.box}>规则编号:</div>{' '}
-              <div className={styles.pox}>
-                <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
-              </div>
-            </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
-              <div className={styles.box}>规则名称:</div>{' '}
-              <div className={styles.pox}>
-                <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
-              </div>
-            </Col>
-              <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
-                <div className={styles.box}>取费基础:</div>
+              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ height: 10, display: 'flex', justifyContent: 'space-between', width: '20%' }}>
+                <div className={styles.box}>规则编号:</div>{' '}
                 <div className={styles.pox}>
-                  <InputGroup size="large" compact style={{ height: '50px', width: '180px' }}>
-                    <Select defaultValue="请选择" style={{ width: '100%', height: '50px' }}>
+                  <Input style={{ height: '30px', width: '100%' }} placeholder="请输入" />
+                </div>
+              </Col>
+              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
+                <div className={styles.box}>物料名称:</div>{' '}
+                <div className={styles.pox}>
+                  <Input style={{ height: '30px', width: '100%' }} placeholder="请输入" />
+                </div>
+              </Col>
+              <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
+                <div className={styles.box}>调整类型:</div>
+                <div className={styles.pox}>
+                  <InputGroup compact style={{ height: '50px', width: '210px' }}>
+                    <Select defaultValue="请选择" style={{ width: '100%', height: '30px' }}>
                       <Option value="data1">Option1-1</Option>
                       <Option value="data2">Option1-2</Option>
                     </Select>
                   </InputGroup>
                 </div>
               </Col>
-              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
                 <div className={styles.box}>作用范围:</div>{' '}
                 <div className={styles.pox}>
-                  <InputGroup size="large" compact style={{ height: '50px', width: '180px' }}>
-                    <Select defaultValue="请选择" style={{ width: '100%', height: '50px' }}>
-                      <Option value="data1">Option1-1</Option>
-                      <Option value="data2">Option1-2</Option>
+                  <InputGroup compact style={{ height: '50px', width: '210px' }}>
+                    <Select defaultValue="请选择" style={{ width: '100%', height: '30px' }} onChange={this.handleChange}>
+                      <Option value="data1">所有定额</Option>
+                      <Option value="data2">单个定额</Option>
+                      <Option value="data3">局部定额</Option>
                     </Select>
                   </InputGroup>
                 </div>
               </Col>
-              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
                 <div className={styles.box}>调整单位:</div>{' '}
                 <div className={styles.pox}>
-                  <InputGroup size="large" compact style={{ height: '50px', width: '180px' }}>
-                    <Select defaultValue="请选择" style={{ width: '100%', height: '50px' }}>
+                  <InputGroup compact style={{ height: '50px', width: '210px' }}>
+                    <Select defaultValue="请选择" style={{ width: '100%', height: '30px' }}>
                       <Option value="data1">Option1-1</Option>
                       <Option value="data2">Option1-2</Option>
                     </Select>
                   </InputGroup>
                 </div>
               </Col>
-              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
-              <div className={styles.box}>所属规则库:</div>{' '}
-              <div className={styles.pox}>
-                <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
-              </div>
-            </Col>
+              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
+                <div className={styles.box}>所属规则库:</div>{' '}
+                <div className={styles.pox}>
+                  <Input style={{ height: '30px', width: '100%' }} placeholder="请输入" />
+                </div>
+              </Col>
             </Row>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
-              <div className={styles.box}>定额系数:</div>{' '}
-              <div className={styles.pox}>
-                <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
+            <Row>
+              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
+                <div className={styles.box}>定额系数:</div>{' '}
+                <div className={styles.pox}>
+                  <Input style={{ height: '30px', width: '100%' }} placeholder="请输入" />
+                </div>
+              </Col>
+              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
+                <div className={styles.box}>人工系数:</div>{' '}
+                <div className={styles.pox}>
+                  <Input style={{ height: '30px', width: '100%' }} placeholder="请输入" />
+                </div>
+              </Col>
+              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
+                <div className={styles.box}>机械系数:</div>{' '}
+                <div className={styles.pox}>
+                  <Input style={{ height: '30px', width: '100%' }} placeholder="请输入" />
+                </div>
+              </Col>
+              <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
+                <div className={styles.box}>材料系数:</div>{' '}
+                <div className={styles.pox}>
+                  <Input style={{ height: '30px', width: '100%' }} placeholder="请输入" />
+                </div>
+              </Col>
+            </Row>
+            <p style={{ width: '90%', borderBottom: '1px solid rgba(232,232,232,1)', marginTop: '1%' }}></p>
+            {/* 单个定额 */}
+            {
+              one && <div style={{ width: '100%' }}>
+                <div className={styles.bt}>
+                  {' '}
+                  <p className={styles.contentp}></p> <h2>请选择定额项目名称(单选) :</h2>
+                </div>
+                <Radio.Group onChange={this.onChange} value={this.state.value} style={{ marginLeft: '8%' }}>
+                  <Radio value={1} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={2} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={3} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={4} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={5} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={6} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={7} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={8} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={9} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={10} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={11} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                  <Radio value={12} style={{ marginLeft: '2%', marginBottom: '2%' }}>定额名称</Radio>
+                </Radio.Group>
               </div>
-            </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
-              <div className={styles.box}>人工系数:</div>{' '}
-              <div className={styles.pox}>
-                <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
+            }
+
+            {/* 局部定额 */}
+            {two &&
+              <div style={{ width: '100%' }}>
+                <div className={styles.bt}>
+                  {' '}
+                  <p className={styles.contentp}></p> <h2>请选择定额项目名称(可多选) :</h2>
+                </div>
+                <Checkbox.Group style={{ width: '100%', padding: '0 10%' }} onChange={this.onChange1}>
+                  <Row>
+                    <Col span={3}>
+                      <Checkbox value="A">定额名称</Checkbox>
+                    </Col>
+                    <Col span={3}>
+                      <Checkbox value="B">定额名称</Checkbox>
+                    </Col>
+                    <Col span={3}>
+                      <Checkbox value="C">定额名称</Checkbox>
+                    </Col>
+                    <Col span={3}>
+                      <Checkbox value="D">定额名称</Checkbox>
+                    </Col>
+                    <Col span={3}>
+                      <Checkbox value="E">定额名称</Checkbox>
+                    </Col>
+                    <Col span={3}>
+                      <Checkbox value="F">定额名称</Checkbox>
+                    </Col>
+                    <Col span={3}>
+                      <Checkbox value="G">定额名称</Checkbox>
+                    </Col>
+                    <Col span={3}>
+                      <Checkbox value="H">定额名称</Checkbox>
+                    </Col>
+                    <Col span={3} style={{ marginTop: 20 }}>
+                      <Checkbox value="I">定额名称</Checkbox>
+                    </Col>
+                    <Col span={3} style={{ marginTop: 20 }}>
+                      <Checkbox value="J">定额名称</Checkbox>
+                    </Col>
+                  </Row>
+                </Checkbox.Group>
               </div>
-            </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
-              <div className={styles.box}>机械系数:</div>{' '}
-              <div className={styles.pox}>
-                <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
-              </div>
-            </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
-              <div className={styles.box}>材料系数:</div>{' '}
-              <div className={styles.pox}>
-                <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
-              </div>
-            </Col>
+            }
             <ul className={styles.btn}>
             <li>
               <Button
@@ -325,7 +420,7 @@ class index2 extends Component {
             
           </div>
         )}
-        {/* 取费规则 */}
+        {/* 工程量审查规则 */}
         {!flag && (
           <div className={styles.content}>
             <div className={styles.bt}>

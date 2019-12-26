@@ -111,9 +111,7 @@ class index3 extends Component {
       value: e.target.value,
     });
   };
-  gotoindex2 = () => {
-    this.props.history.push('/rules/index2');
-  };
+
   gotocreate = () => {
     this.props.history.push('/rules/index3add');
   };
@@ -126,7 +124,7 @@ class index3 extends Component {
     return (
       <div>
         <div className={styles.top}>
-          <div className={styles.active} onClick={this.gotoindex2}>
+          <div className={styles.active}>
             物料审查规则
           </div>
           <Breadcrumb

@@ -1,3 +1,4 @@
+//权限管理
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import {
@@ -153,31 +154,6 @@ class index3 extends Component {
             {' '}
             <p className={styles.contentp}></p> <h2>权限选择 :</h2>
           </div>
-
-          {/* <Button
-            type="primary"
-            htmlType="submit"
-            style={{
-              backgroundColor: '#237F7E',
-              border: '1px solid #237F7E',
-              height: '32px',
-              width: '74px',
-              marginLeft: '10%',
-              marginBottom: '2%'
-            }}
-          >新增</Button>          
-          <Button
-            type="primary"
-            htmlType="submit"
-            style={{
-              backgroundColor: '#237F7E',
-              border: '1px solid #237F7E',
-              height: '32px',
-              width: '74px',
-              marginLeft: '90%',
-              marginBottom: '2%'
-            }}
-          >返回</Button> */}
         </div>
       </div>
     );
