@@ -155,25 +155,12 @@ const data2 = [
     cp: '关联项目',
   },
 ];
-var check = 0;
-var checkContent=[];
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-    check = selectedRowKeys;
-    checkContent=selectedRows
-    
-  },
-  getCheckboxProps: record => ({
-    disabled: record.name === 'Disabled User', // Column configuration not to be checked
-    name: record.name,
-  }),
-};
 class index2 extends Component {
   constructor() {
     super();
     this.state = {
       flag: true,
+      checkState: true//默认禁用
     };
   }
   onChange = e => {
@@ -196,14 +183,7 @@ class index2 extends Component {
     this.props.history.push('/rules/indexadd');
   }
   modify = () => {//工程量审查修改
-    console.log(check);
-   if(check=='0'||check==""){
-     confirm("请选择你想修改的项目")
-   }else if(check.length>1){
-     confirm("一次只能修改一个项目，谢谢")
-   }else{
-    this.props.history.push('/rules/indexmodify');
-   }
+      this.props.history.push('/rules/indexmodify');
   }
   addGC2 = () => {//工程规则新增
     this.props.history.push('/rules/indexaddGC');
@@ -212,7 +192,26 @@ class index2 extends Component {
     this.props.history.push('/rules/indexmodifyGC');
   }
   render() {
-    const { flag } = this.state;
+    const { flag,checkState } = this.state;
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        console.log(selectedRowKeys,selectedRows);
+        if (selectedRowKeys.length == 1) {
+          this.setState({
+            checkState: false
+          })
+        } else {
+             this.setState({
+              checkState:true
+            })
+        }
+      },
+      getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User', // Column configuration not to be checked
+        name: record.name,
+      }),
+    };
 
     return (
       <div>
@@ -353,8 +352,8 @@ class index2 extends Component {
                     height: '80%',
                     width: '100%',
                   }}
-                  onClick={this.modify}
-                  disabled={!data}
+                  onClick={()=>this.modify()}
+                  disabled={checkState}
                 >
                   修改
                 </Button>
@@ -369,6 +368,7 @@ class index2 extends Component {
                     height: '80%',
                     width: '100%',
                   }}
+                  disabled={checkState}
                 >
                   删除
                 </Button>
@@ -561,7 +561,7 @@ class index2 extends Component {
                     height: '80%',
                     width: '100%',
                   }}
-                  disabled={!data2}
+                  disabled={checkState}
                 >
                   修改
                 </Button>
@@ -576,6 +576,7 @@ class index2 extends Component {
                     height: '80%',
                     width: '100%',
                   }}
+                  disabled={checkState}
                 >
                   删除
                 </Button>

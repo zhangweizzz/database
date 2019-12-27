@@ -124,8 +124,9 @@ class index3 extends Component {
         </div>
         <div className={styles.content} style={{paddingLeft:0}}>
           {/* 左边盒子 */}
-          <div style={{ width: '20%',marginLeft:0}}>
+          <div style={{ width: '20%',marginLeft:0,border:'1px solid #E8E8E8'}}>
             <div style={{width:'100%',background:'#2FBBB8',height:'5%'}}>费率表分类</div>
+            <div style={{width:'100%'}}>151451</div>
           </div>
           {/* 右边盒子 */}
           <div style={{ width: '45%' }}>
