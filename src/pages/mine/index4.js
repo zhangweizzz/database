@@ -155,7 +155,7 @@ class index3 extends Component {
               >新建</Button>
               <Select defaultValue="lucy" style={{ width: '50%',marginLeft:'5%' }} onChange={this.handleChange}>
                 <Option value="1">Jack</Option>
-                <Option value="2">Lucy</Option>       
+                <Option value="2">Lucy</Option>
                 <Option value="3">yimi</Option>
               </Select>
             </div>
