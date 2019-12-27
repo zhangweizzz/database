@@ -1,16 +1,16 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 
-// import echarts from 'echarts/lib/echarts';
-// // 引入柱状图
-// import 'echarts/lib/chart/bar';
-// // 引入柱饼图
-// import 'echarts/lib/chart/pie';
-// // 引入提示框和标题组件
-// import 'echarts/lib/component/tooltip';
-// import 'echarts/lib/component/title';
-// import 'echarts/lib/component/legendScroll';
-// import Echart from './Echart';
+import echarts from 'echarts/lib/echarts';
+// 引入柱状图
+import 'echarts/lib/chart/bar';
+// 引入柱饼图
+import 'echarts/lib/chart/pie';
+// 引入提示框和标题组件
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/title';
+import 'echarts/lib/component/legendScroll';
+import Echart from './Echart';
 
 import {
   Row,
@@ -202,7 +202,7 @@ class detail extends Component {
           </div>
           <div className={styles.scright}>
             <div className={styles.scheard}>审查通过率</div>
-            {/* <Echart /> */}
+            <Echart />
           </div>
           <div style={{ width: '94%', margin: '0 auto' }}>
             <Table
