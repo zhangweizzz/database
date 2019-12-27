@@ -129,8 +129,19 @@ class index3 extends Component {
         </div>
         <div className={styles.content}>
           {/* 左边盒子 */}
-          <div style={{ width: '45%' }}>
-            <Button style={{ marginBottom: 15 }}>新建</Button>
+          <div style={{ width: '45%'}}>
+          <Button
+                type="primary"
+                htmlType="submit"
+                style={{
+                  backgroundColor: '#237F7E',
+                  border: '1px solid #237F7E',
+                  height: '32px',
+                  width: '74px',
+                  marginLeft: 0,
+                  marginBottom:'2%'
+                }}
+              >新建</Button>
             <Table
               columns={columns}
               dataSource={data}
@@ -141,7 +152,7 @@ class index3 extends Component {
           </div>
           {/* 右边盒子 */}
           <div style={{ width: '45%' }}>
-            <div className={styles.pox} style={{ display: 'flex', marginBottom: 15 }}>
+            <div className={styles.pox} style={{ display: 'flex'}}>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -164,7 +175,7 @@ class index3 extends Component {
               dataSource={data}
               bordered
               pagination={false}
-              style={{ width: '90%' }}
+              style={{ width: '90%',marginTop:'7%' }}
             />
           </div>
 

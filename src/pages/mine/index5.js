@@ -14,11 +14,13 @@ import {
   Button,
   Table,
   Radio,
+  Tree
 } from 'antd';
 import styles from './index5.less';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
+const { TreeNode, DirectoryTree } = Tree;
 
 const columns = [
   {
@@ -58,18 +60,6 @@ const data = [
     djhs: 65
   },
 ];
-// const rowSelection = {
-//   onChange: (selectedRowKeys, selectedRows) => {
-//     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-//   },
-//   getCheckboxProps: record => ({
-//     disabled: record.name === 'Disabled User', // Column configuration not to be checked
-//     name: record.name,
-//   }),
-// };
-// function handleChange(value) {
-//   console.log(`selected ${value}`);
-// }
 class index3 extends Component {
   constructor() {
     super();
@@ -78,8 +68,15 @@ class index3 extends Component {
       value: 1,
     };
   }
+  onSelect = (keys, event) => {
+    console.log('Trigger Select', keys, event);
+  };
 
-  handleChange=(value)=> {
+  onExpand = () => {
+    console.log('Trigger Expand');
+  };
+
+  handleChange = (value) => {
     console.log(`selected ${value}`);
   }
 
@@ -89,7 +86,7 @@ class index3 extends Component {
       value: e.target.value,
     });
   };
- 
+
   back = () => {
     this.props.history.go(-1);
   }
@@ -122,15 +119,33 @@ class index3 extends Component {
             </Breadcrumb.Item>
           </Breadcrumb>
         </div>
-        <div className={styles.content} style={{paddingLeft:0}}>
+        <div className={styles.content123} style={{ paddingLeft: 0 }}>
           {/* 左边盒子 */}
-          <div style={{ width: '20%',marginLeft:0,border:'1px solid #E8E8E8'}}>
-            <div style={{width:'100%',background:'#2FBBB8',height:'5%'}}>费率表分类</div>
-            <div style={{width:'100%'}}>151451</div>
+          <div className={styles.left}>
+            <div style={{ width: '100%', background: '#2FBBB8', height: '8%', textAlign: 'center', color: 'white', lineHeight: 4, fontSize: 14 }}>费率表分类</div>
+            <div style={{ width: '100%' }}>
+              <DirectoryTree multiple defaultExpandAll onSelect={this.onSelect} onExpand={this.onExpand}>
+                <TreeNode title="parent 0" key="0-0">
+                  <TreeNode title="parent 1" key="0-1">
+                    <TreeNode title="leaf 0-0" key="0-0-0" isLeaf />
+                    <TreeNode title="leaf 0-1" key="0-0-1" isLeaf />
+                  </TreeNode>
+                </TreeNode>
+                <TreeNode title="parent 1" key="0-1">
+                  <TreeNode title="leaf 1-0" key="0-1-0" isLeaf />
+                  <TreeNode title="leaf 1-1" key="0-1-1" isLeaf />
+                </TreeNode>
+              </DirectoryTree>
+            </div>
           </div>
           {/* 右边盒子 */}
-          <div style={{ width: '45%' }}>
-            <div className={styles.pox} style={{ display: 'flex', marginBottom: 15 }}>
+          <div className={styles.right}>
+            <div className={styles.pox} style={{ display: 'flex' }}>
+              <Select defaultValue="lucy" style={{ width: '80%', marginRight: '3%',float:'left' }} onChange={this.handleChange}>
+                <Option value="1">Jack</Option>
+                <Option value="2">Lucy</Option>
+                <Option value="3">yimi</Option>
+              </Select>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -142,18 +157,13 @@ class index3 extends Component {
                   marginLeft: 0
                 }}
               >新建</Button>
-              <Select defaultValue="lucy" style={{ width: '50%',marginLeft:'5%' }} onChange={this.handleChange}>
-                <Option value="1">Jack</Option>
-                <Option value="2">Lucy</Option>
-                <Option value="3">yimi</Option>
-              </Select>
             </div>
             <Table
               columns={columns}
               dataSource={data}
               bordered
               pagination={false}
-              style={{ width: '90%' }}
+              style={{ width: '90%',marginTop: '4%' }}
             />
           </div>
 

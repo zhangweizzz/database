@@ -87,21 +87,15 @@ const data = [
     gl: '国家电网',
   },
 ];
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  getCheckboxProps: record => ({
-    disabled: record.name === 'Disabled User', // Column configuration not to be checked
-    name: record.name,
-  }),
-};
+
 class index3 extends Component {
   constructor() {
     super();
     this.state = {
       flag: true,
       value: 1,
+      checkState: true,//修改默认禁用
+      delState: true//删除默认禁用
     };
   }
 
@@ -119,7 +113,33 @@ class index3 extends Component {
     this.props.history.push('/rules/index3modify');
   };
   render() {
-    const { flag } = this.state;
+    const { flag,checkState,delState } = this.state;
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        console.log(selectedRowKeys,selectedRows);
+        if (selectedRowKeys.length == 1) {
+          this.setState({
+            checkState: false,//修改按钮
+            delState:false//删除按钮
+          })
+        } else if(selectedRowKeys.length>1){
+          this.setState({
+            checkState: true,//修改按钮
+            delState:false//删除按钮
+          })
+        }else {
+          this.setState({
+           checkState:true,
+           delState:true
+         })
+     }
+      },
+      getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User', // Column configuration not to be checked
+        name: record.name,
+      }),
+    };
 
     return (
       <div>
@@ -266,6 +286,7 @@ class index3 extends Component {
                   width: '100%',
                 }}
                 onClick={this.gotoIndex3Modify}
+                disabled={checkState}
               >
                 修改
               </Button>
@@ -281,6 +302,7 @@ class index3 extends Component {
                   height: '80%',
                   width: '100%',
                 }}
+                disabled={delState}
               >
                 删除
               </Button>

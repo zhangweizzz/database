@@ -217,10 +217,10 @@ class index1 extends Component {
           </div>
           <div className={styles.box4}>
             <Row gutter={10}>
-              {/* <Col>
+              <Col>
                 <Card
                   title="操作记录"
-                  style={{ borderRadius: '20px', height: 40 }}
+                  style={{ borderRadius: '20px', height: 40,padding:0 }}
                   bordered={false}
                   headStyle={{
                     background: '#2FBBB8',
@@ -228,10 +228,10 @@ class index1 extends Component {
                     height: 40,
                     color: 'white',
                   }}
-                > */}
+                >
+                </Card>
                   <Table columns={columns} dataSource={data} bordered/>
-                {/* </Card>
-              </Col> */}
+              </Col>
             </Row>
           </div>
         </div>

@@ -22,10 +22,30 @@ const { Option } = Select;
 import styles from './pricing.less';
 
 class index extends Component {
+  constructor() {
+    super();
+    this.state = {
+      flag: true,
+      checkState: true,//修改默认禁用
+      delState: true//删除默认禁用
+    };
+  }
   cz = () => {
     this.props.history.push('');
   };
+  card1 = () => {
+    this.setState({
+      flag: true,
+    });
+  };
+  card2 = () => {
+    this.setState({
+      flag: false,
+    });
+    this.props.history.push('/pricing/index2')
+  };
   render() {
+    const { flag,checkState,delState } = this.state;
     const columns = [
       {
         title: '编号',
@@ -102,7 +122,12 @@ class index extends Component {
     return (
       <div>
         <div className={styles.top}>
-          <div className={styles.title}>信息价</div>
+        <div className={flag ? styles.title : styles.active} onClick={this.card1}>
+            信息价
+          </div>
+          <div className={flag ? styles.title2 : styles.active2} onClick={this.card2}>
+            信息价库
+          </div>
           <Breadcrumb
             style={{
               fontSize: '22px',

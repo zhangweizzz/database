@@ -145,11 +145,46 @@ function onChange(e) {
   console.log(`checked = ${e.target.checked}`);
 }
 class index extends Component {
+  constructor() {
+    super();
+    this.state = {
+      flag: true,
+      checkState: true,//修改默认禁用
+      delState: true//删除默认禁用
+    };
+  }
   indexadd = () => {
     this.props.history.push('/dashboard/indexadd');
   };
 
   render() {
+    const { flag,checkState,delState } = this.state;
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        console.log(selectedRowKeys,selectedRows);
+        if (selectedRowKeys.length == 1) {
+          this.setState({
+            checkState: false,//修改按钮
+            delState:false//删除按钮
+          })
+        } else if(selectedRowKeys.length>1){
+          this.setState({
+            checkState: true,//修改按钮
+            delState:false//删除按钮
+          })
+        }else {
+          this.setState({
+           checkState:true,
+           delState:true
+         })
+     }
+      },
+      getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User', // Column configuration not to be checked
+        name: record.name,
+      }),
+    };
     return (
       <div>
         <div className={styles.top}>
@@ -346,6 +381,7 @@ class index extends Component {
                   height: '80%',
                   width: '100%',
                 }}
+                disabled={checkState}
               >
                 修改
               </Button>
@@ -360,6 +396,7 @@ class index extends Component {
                   height: '80%',
                   width: '100%',
                 }}
+                disabled={delState}
               >
                 删除
               </Button>

@@ -97,6 +97,9 @@ class index2 extends Component {
   gotoindex2 = () => {
     this.props.history.push('/pricing/index2');
   };
+  back=()=>{
+    this.props.history.go(-1);
+  }
   render() {
     const { flag } = this.state;
 
@@ -218,6 +221,7 @@ class index2 extends Component {
                   height: '80%',
                   width: '100%',
                 }}
+                onClick={this.back}
               >
                 取消
               </Button>

@@ -21,6 +21,25 @@ const InputGroup = Input.Group;
 const { Option } = Select;
 
 class index2 extends Component {
+  constructor() {
+    super();
+    this.state = {
+      flag: false,
+      checkState: true,//修改默认禁用
+      delState: true//删除默认禁用
+    };
+  }
+  card1 = () => {
+    this.setState({
+      flag: true,
+    });
+    this.props.history.push('/pricing/index')
+  };
+  card2 = () => {
+    this.setState({
+      flag: false,
+    });
+  };
   gotoPricing2 = () => {
     this.props.history.push('/pricing/index2modify');
   };
@@ -28,6 +47,7 @@ class index2 extends Component {
     this.props.history.push('/pricing/index2add');
   };
   render() {
+    const { flag,checkState,delState } = this.state;
     const columns = [
       {
         title: '期号',
@@ -85,20 +105,40 @@ class index2 extends Component {
     // rowSelection objects indicates the need for row selection
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        console.log(selectedRowKeys,selectedRows);
+        if (selectedRowKeys.length == 1) {
+          this.setState({
+            checkState: false,//修改按钮
+            delState:false//删除按钮
+          })
+        } else if(selectedRowKeys.length>1){
+          this.setState({
+            checkState: true,//修改按钮
+            delState:false//删除按钮
+          })
+        }else {
+          this.setState({
+           checkState:true,
+           delState:true
+         })
+     }
       },
-      onSelect: (record, selected, selectedRows) => {
-        console.log(record, selected, selectedRows);
-      },
-      onSelectAll: (selected, selectedRows, changeRows) => {
-        console.log(selected, selectedRows, changeRows);
-      },
+      getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User', // Column configuration not to be checked
+        name: record.name,
+      }),
     };
 
     return (
       <div>
         <div className={styles.top}>
-          <div className={styles.title}>信息价</div>
+        <div className={flag ? styles.title : styles.active} onClick={this.card1}>
+            信息价
+          </div>
+          <div className={flag ? styles.title2 : styles.active2} onClick={this.card2}>
+            信息价库
+          </div>
           <Breadcrumb
             style={{
               fontSize: '22px',
@@ -237,6 +277,7 @@ class index2 extends Component {
                   width: '100%',
                 }}
                 onClick={this.gotoPricing2}
+                disabled={checkState}
               >
                 修改
               </Button>
@@ -251,6 +292,7 @@ class index2 extends Component {
                   height: '80%',
                   width: '100%',
                 }}
+                disabled={delState}
               >
                 删除
               </Button>

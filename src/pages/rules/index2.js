@@ -360,52 +360,6 @@ class index2 extends Component {
                   重置
                 </Button>
               </li>
-              {/* <li>
-                <Button
-                  onClick={this.creatR2}
-                  type="primary"
-                  htmlType="submit"
-                  style={{
-                    backgroundColor: '#237F7E',
-                    border: '1px solid #237F7E',
-                    height: '80%',
-                    width: '100%',
-                  }}
-                >
-                  新建
-                </Button>
-              </li>
-              <li>
-                <Button
-                  onClick={this.modify2}
-                  type="primary"
-                  htmlType="submit"
-                  disabled={data2 == '' ? true : false}
-                  style={{
-                    backgroundColor: '#237F7E',
-                    border: '1px solid #237F7E',
-                    height: '80%',
-                    width: '100%',
-                  }}
-                >
-                  修改
-                </Button>
-              </li>
-
-              <li>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{
-                    backgroundColor: '#237F7E',
-                    border: '1px solid #237F7E',
-                    height: '80%',
-                    width: '100%',
-                  }}
-                >
-                  删除
-                </Button>
-              </li> */}
             </ul>
             <Table
               columns={columns2}
