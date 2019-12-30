@@ -185,9 +185,30 @@ export default {
                   component: '../pages/rules/index',
                 },
                 {
+                  path: '/rules/indexadd',//工程量新增
+                  component: '../pages/rules/indexadd',
+                },
+                {
+                  path: '/rules/indexmodify',//工程量修改
+                  component: '../pages/rules/indexmodify',
+                },
+                ,
+                {
+                  path: '/rules/indexaddGC',//工程规则新增
+                  component: '../pages/rules/indexaddGC',
+                },
+                {
+                  path: '/rules/indexmodifyGC',//工程规则修改
+                  component: '../pages/rules/indexmodifyGC',
+                },
+                {
                   path: '/rules/index2',
                   name: 'rules2',
                   component: '../pages/rules/index2',
+                },
+                {
+                  path: '/rules/index2detail', //index2项目详情页
+                  component: '../pages/rules/index2detail',
                 },
                 {
                   path: '/rules/index2add', //新建页
@@ -210,6 +231,10 @@ export default {
                   path: '/rules/index3detail', //项目详情页
                   component: '../pages/rules/index3detail',
                 },
+                {
+                  path: '/rules/index3modify', //修改页
+                  component: '../pages/rules/index3modify',
+                }
               ],
             },
             {
@@ -259,6 +284,10 @@ export default {
                   path: '/mine/index1',
                   name: 'mine1',
                   component: '../pages/mine/index1',
+                },
+                {
+                  path: '/mine/systemLog',//系统日志管理
+                  component: '../pages/mine/systemLog',
                 },
                 {
                   path: '/mine/index2',

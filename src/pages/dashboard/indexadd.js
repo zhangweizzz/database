@@ -185,7 +185,7 @@ class indexadd extends Component {
                     <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} >
                         <div className={styles.zox} >导入定额文件:</div>
                          <div className={styles.pox}>
-                             <Input style={{height:"40px" , width: '65%'}} placeholder="请输入" />
+                             <Input style={{height:"40px" , width: '55%',float:"left",marginRight:"5%"}} placeholder="请输入" />
                              <Upload {...props} style={{float:"left"}}>
     <Button style={{backgroundColor:"#237F7E",color:"#FFFFFF"}}>
       导入

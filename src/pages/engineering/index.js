@@ -1,8 +1,8 @@
 import React, {Component,Fragment} from 'react';
 import { connect } from 'dva';
-import { Row, Col, Breadcrumb, Icon,Layout, Menu, Input,Select,InputNumber, Button,Table,Popconfirm,Modal} from 'antd';
+import { Row, Col, Breadcrumb, Icon,Layout, Menu, Input,Select,InputNumber, Button,Table} from 'antd';
 
-import styles from './quoat.less';
+import styles from './index.less';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 const InputGroup = Input.Group;
@@ -12,41 +12,50 @@ const { Option } = Select;
 
 const columns=[
     {
-        title:'标记',
+        title:'编号',
         dataIndex:'biaoji',
-        render: text => <a>{text}</a>,
+        render: (text, record) => <a href="/engineering/detail">{record.biaoji}</a>,
 
     },
     {
-        title:'定额编号',
+        title:'名称',
         dataIndex:'bianhao',
+        render: (text, record) => <a href="/engineering/detail">{record.bianhao}</a>,
     },
     {
-        title:'项目名称',
+        title:'性质',
         dataIndex:'mingchen',
+        render: (text, record) => <a href="/engineering/detail">{record.mingchen}</a>,
     },
     {
-        title:'单位',
+        title:'类型',
         dataIndex:'danwei',
+        render: (text, record) => <a href="/engineering/detail">{record.danwei}</a>,
     },
-{
-
-    title:"基价",
-    children: [
+,
+    
         {
-            title:"人工费",
+            title:"项目划分",
             dataIndex:"rengong",
+            render: (text, record) => <a href="/engineering/detail">{record.rengong}</a>,
         },
         {
-            title:"材料费",
+            title:"预算类型",
             dataIndex:"cailiao",
+            render: (text, record) => <a href="/engineering/detail">{record.cailiao}</a>,
         }
         ,{
-            title:"机械费",
+            title:"电压类型",
             dataIndex:"jixie",
+            render: (text, record) => <a href="/engineering/detail">{record.jixie}</a>,
+        },
+        {
+            title:"项目时间",
+            dataIndex:"time", 
+            render: (text, record) => <a href="/engineering/detail">{record.time}</a>,
         }
-      ],
-}
+      
+
    
     
    
@@ -60,7 +69,8 @@ const data=[
         danwei:"单位",
         rengong:"人工费",
         cailiao:"材料费",
-        jixie:"机械费"
+        jixie:"机械费",
+        time:"项目时间"
     },
     {
         key:"2",
@@ -70,7 +80,8 @@ const data=[
         danwei:"单位",
         rengong:"人工费",
         cailiao:"材料费",
-        jixie:"机械费" 
+        jixie:"机械费" ,
+        time:"项目时间"
     },
     {
         key:"3",
@@ -80,7 +91,8 @@ const data=[
         danwei:"单位",
         rengong:"人工费",
         cailiao:"材料费",
-        jixie:"机械费" 
+        jixie:"机械费" ,
+        time:"项目时间"
     },
     {
         key:"4",
@@ -90,7 +102,8 @@ const data=[
         danwei:"单位",
         rengong:"人工费",
         cailiao:"材料费",
-        jixie:"机械费" 
+        jixie:"机械费" ,
+        time:"项目时间"
     },
     {
         key:"5",
@@ -100,87 +113,30 @@ const data=[
         danwei:"单位",
         rengong:"人工费",
         cailiao:"材料费",
-        jixie:"机械费"  
+        jixie:"机械费" , 
+        time:"项目时间"
     }
    
 ]
+const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
+    getCheckboxProps: record => ({
+      disabled: record.name === 'Disabled User', // Column configuration not to be checked
+      name: record.name,
+    }),
+  };
 
-
-
-
-class Quota extends Component {
-    constructor() {
-        super();
-        this.state = {
-            detailok:true,
-         detailmodel: false,
-         checkState: true,//修改默认禁用
-         delState: true//删除默认禁用 
-        };
-      }
+class index extends Component {
     
-    
-    add=()=>{
-        this.props.history.push("/dashboard/add")
-    }
-    amend=()=>{
-        this.props.history.push("/dashboard/amend")
-    }
-    detail=()=>{
-        this.setState({
-            detailmodel: true,
-          });
-    }
-    handleOk = e => {
-        console.log(e);
-        this.setState({
-            detailmodel: false,
-        });
-      };
-    
-      handleCancel = e => {
-        console.log(e);
-        this.setState({
-            detailmodel: false,
-        });
-      };
-  
+
 
     render(){
-        
-            const { detailok,checkState,delState }=this.state
-            
-            const rowSelection = {
-                onChange: (selectedRowKeys, selectedRows) => {
-                  // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-                  console.log(selectedRowKeys,selectedRows);
-                  if (selectedRowKeys.length == 1) {
-                    this.setState({
-                      checkState: false,//修改按钮
-                      delState:false//删除按钮
-                    })
-                  } else if(selectedRowKeys.length>1){
-                    this.setState({
-                      checkState: true,//修改按钮
-                      delState:false//删除按钮
-                    })
-                  }else {
-                    this.setState({
-                     checkState:true,
-                     delState:true
-                   })
-               }
-                },
-                getCheckboxProps: record => ({
-                  disabled: record.name === 'Disabled User', // Column configuration not to be checked
-                  name: record.name,
-                }),
-              };
-       
         return(
             <div>
                 <div className={styles.top}>
-                        <div className={styles.title}>定额
+                        <div className={styles.title}>工程管理
                         </div>     
                          <Breadcrumb style={{
                          fontSize:"14px",
@@ -192,10 +148,8 @@ class Quota extends Component {
     <Breadcrumb.Item href=""style={{  color:"#FFFFFF",marginLeft:"20px"}}>
     <span>首页</span>
     </Breadcrumb.Item  >
-    <Breadcrumb.Item href=""style={{  color:"#FFFFFF",}} >
-      <span>定额数据管理</span>
-    </Breadcrumb.Item>
-    <Breadcrumb.Item style={{  color:"#FDDB28",}} >定额</Breadcrumb.Item>
+  
+    <Breadcrumb.Item style={{  color:"#FDDB28",}} >工程管理</Breadcrumb.Item>
     </Breadcrumb>,
                     </div> 
                     <div className={styles.content}>
@@ -264,7 +218,7 @@ class Quota extends Component {
                             <li>
                             <Button type="primary" 
                             htmlType="submit"
-                             onClick={this.add} 
+                            
                              style={{backgroundColor:"#237F7E",border:"1px solid #237F7E",height:"80%",width:"100%"}}>
                                     新增
                             </Button> 
@@ -273,36 +227,18 @@ class Quota extends Component {
                             <Button
                              type="primary"
                               htmlType="submit" 
-                              onClick={this.amend} 
+                          
                               style={{backgroundColor:"#237F7E",
                               border:"1px solid #237F7E",height:"80%",
                               width:"100%",
-                              }}
-                              disabled={checkState}
-                              >
+                              }}>
                                  修改
                             </Button> 
                             </li>   
                             <li>
-                            <Button type="primary" 
-                            disabled={delState}
-                            htmlType="submit"  
-                            disabled={detailok} 
-                            onClick={this.detail}
-                            style={{backgroundColor:"#237F7E",border:"1px solid #237F7E",height:"80%",width:"100%"}}> 
-                            删除 
-                            </Button>  
-                            <Modal
-          title="删除"
-          visible={this.state.detailmodel}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          closable={false}
-          keyboard={true}
-          centered={true}
-              >
-                <p>您确定要删除此物料审查规则吗？</p>
-            </Modal>                     
+                            <Button type="primary" htmlType="submit" style={{backgroundColor:"#237F7E",border:"1px solid #237F7E",height:"80%",width:"100%"}}>
+                                 删除
+                            </Button> 
                             </li>   
                     </ul>
 
@@ -328,4 +264,4 @@ class Quota extends Component {
 	
 
 
-export default Quota;
+export default index;

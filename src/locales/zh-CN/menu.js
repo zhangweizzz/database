@@ -67,4 +67,6 @@ export default {
   'menu.mine.mine3': '权限管理',
   'menu.mine.mine4': '字典管理',
   'menu.mine.mine5': '费率表',
+  "menu.engineering":"工程管理",
+  "menu.engineering.engineering1":"工程管理"
 };

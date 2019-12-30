@@ -1,227 +1,143 @@
-import { Alert, Checkbox, Icon } from 'antd';
-import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { Component } from 'react';
-import Link from 'umi/link';
 import { connect } from 'dva';
-import LoginComponents from './components/Login';
-import styles from './style.less';
-const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginComponents;
-
-class Login extends Component {
-  loginForm = undefined;
-  state = {
-    type: 'account',
-    autoLogin: true,
-  };
-  changeAutoLogin = e => {
-    this.setState({
-      autoLogin: e.target.checked,
-    });
-  };
-  handleSubmit = (err, values) => {
-    const { type } = this.state;
-
-    if (!err) {
-      const { dispatch } = this.props;
-      dispatch({
-        type: 'login/login',
-        payload: { ...values, type },
-      });
-    }
-  };
-  onTabChange = type => {
-    this.setState({
-      type,
-    });
-  };
-  onGetCaptcha = () =>
-    new Promise((resolve, reject) => {
-      if (!this.loginForm) {
-        return;
+import { Row, Col, Form, Input,  Button, } from 'antd';
+const FormItem = Form.Item;
+@connect(({ login, }) => ({
+  login,
+}))
+@Form.create()
+class LoginPage extends Component {
+  loginIn(){
+    const {form,dispatch} = this.props;
+    form.validateFields((err, values) => {
+      if(!err){
+        dispatch({
+          type:'login/loginInFetch',
+          payload:values,
+        })
       }
-
-      this.loginForm.validateFields(['mobile'], {}, async (err, values) => {
-        if (err) {
-          reject(err);
-        } else {
-          const { dispatch } = this.props;
-
-          try {
-            const success = await dispatch({
-              type: 'login/getCaptcha',
-              payload: values.mobile,
-            });
-            resolve(!!success);
-          } catch (error) {
-            reject(error);
-          }
-        }
-      });
-    });
-  renderMessage = content => (
-    <Alert
-      style={{
-        marginBottom: 24,
-      }}
-      message={content}
-      type="error"
-      showIcon
-    />
-  );
-
-  render() {
-    const { userLogin, submitting } = this.props;
-    const { status, type: loginType } = userLogin;
-    const { type, autoLogin } = this.state;
+    })
+  }
+  render(){
+    const { getFieldDecorator } = this.props.form;
     return (
-      <div className={styles.main}>
-        <LoginComponents
-          defaultActiveKey={type}
-          onTabChange={this.onTabChange}
-          onSubmit={this.handleSubmit}
-          onCreate={form => {
-            this.loginForm = form;
-          }}
-        >
-          <Tab
-            key="account"
-            tab={formatMessage({
-              id: 'user-login.login.tab-login-credentials',
-            })}
-          >
-            {status === 'error' &&
-              loginType === 'account' &&
-              !submitting &&
-              this.renderMessage(
-                formatMessage({
-                  id: 'user-login.login.message-invalid-credentials',
-                }),
-              )}
-            <UserName
-              name="userName"
-              placeholder={`${formatMessage({
-                id: 'user-login.login.userName',
-              })}: admin or user`}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({
-                    id: 'user-login.userName.required',
-                  }),
-                },
-              ]}
-            />
-            <Password
-              name="password"
-              placeholder={`${formatMessage({
-                id: 'user-login.login.password',
-              })}: ant.design`}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({
-                    id: 'user-login.password.required',
-                  }),
-                },
-              ]}
-              onPressEnter={e => {
-                e.preventDefault();
-
-                if (this.loginForm) {
-                  this.loginForm.validateFields(this.handleSubmit);
-                }
-              }}
-            />
-          </Tab>
-          <Tab
-            key="mobile"
-            tab={formatMessage({
-              id: 'user-login.login.tab-login-mobile',
-            })}
-          >
-            {status === 'error' &&
-              loginType === 'mobile' &&
-              !submitting &&
-              this.renderMessage(
-                formatMessage({
-                  id: 'user-login.login.message-invalid-verification-code',
-                }),
-              )}
-            <Mobile
-              name="mobile"
-              placeholder={formatMessage({
-                id: 'user-login.phone-number.placeholder',
-              })}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({
-                    id: 'user-login.phone-number.required',
-                  }),
-                },
-                {
-                  pattern: /^1\d{10}$/,
-                  message: formatMessage({
-                    id: 'user-login.phone-number.wrong-format',
-                  }),
-                },
-              ]}
-            />
-            <Captcha
-              name="captcha"
-              placeholder={formatMessage({
-                id: 'user-login.verification-code.placeholder',
-              })}
-              countDown={120}
-              onGetCaptcha={this.onGetCaptcha}
-              getCaptchaButtonText={formatMessage({
-                id: 'user-login.form.get-captcha',
-              })}
-              getCaptchaSecondText={formatMessage({
-                id: 'user-login.captcha.second',
-              })}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({
-                    id: 'user-login.verification-code.required',
-                  }),
-                },
-              ]}
-            />
-          </Tab>
-          <div>
-            <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
-              <FormattedMessage id="user-login.login.remember-me" />
-            </Checkbox>
-            <a
-              style={{
-                float: 'right',
-              }}
-              href=""
-            >
-              <FormattedMessage id="user-login.login.forgot-password" />
-            </a>
-          </div>
-          <Submit loading={submitting}>
-            <FormattedMessage id="user-login.login.login" />
-          </Submit>
-          <div className={styles.other}>
-            <FormattedMessage id="user-login.login.sign-in-with" />
-            <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
-            <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
-            <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
-            <Link className={styles.register} to="/user/register">
-              <FormattedMessage id="user-login.login.signup" />
-            </Link>
-          </div>
-        </LoginComponents>
+      <div id="loginContent">
+        <Form layout="inline" style={{ paddingTop: 20,textAlign:'center'}}>
+          <Row gutter={{ md: 24, lg: 24, xl: 48 }}>
+            <Col md={24} sm={24}>
+              <FormItem label="用户名">
+                {getFieldDecorator('username', {
+                  rules: [
+                    {
+                      required: false,
+                      message: '',
+                    },
+                  ],
+                })(
+                  <Input placeholder="请输入" />
+                )}
+              </FormItem>
+            </Col>
+            <Col md={24} sm={24}>
+              <FormItem label="密码">
+                {getFieldDecorator('password', {
+                  rules: [
+                    {
+                      required: false,
+                      message: '',
+                    },
+                  ],
+                })(
+                  <Input placeholder="请输入" />
+                )}
+              </FormItem>
+            </Col>
+            <Col md={24} sm={24}>
+              <Button type="primary" onClick={this.loginIn.bind(this)}>
+                登录
+              </Button>
+            </Col>
+          </Row>
+        </Form>
       </div>
     );
   }
 }
 
-export default connect(({ login, loading }) => ({
-  userLogin: login.state,
-  submitting: loading.effects['login/login'],
-}))(Login);
+export default LoginPage;
+
+
+
+
+
+// import React, { Component, Fragment } from 'react';
+// import { connect } from 'dva';
+// import {
+//   Form, Icon, Input, Button, Checkbox
+// } from 'antd';
+// import styles from './index.less';
+
+// @connect(({ login, }) => ({
+//   login,
+// }))
+// // const user_Reg = /^1([38]\d|5[0-35-9]|7[3678])\d{8}$/;
+// class login extends Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       flag1: 0,
+//       flag2:0,
+//       username:'',
+//       password:''
+//     };
+//   }
+
+//   handleSubmit = e => {
+//     e.preventDefault();
+//     this.props.form.validateFields((err, values) => {
+//       if (!err) {
+//         console.log('Received values of form: ', values);
+//       }
+//     });
+//   };
+//   onInputUser=(e)=>{
+//     this.setState({
+//       username:e.target.value
+//     }) 
+//   }
+//   onInputPassword=(e)=>{
+//     this.setState({
+//       password:e.target.value
+//     })  
+//   }
+
+//   login=()=>{
+//     const {dispatch} = this.props;
+//     console.log(this.state.username,this.state.password);
+//     dispatch({type:'login',payload:{user:this.state.username,password:this.state.password}})
+//   }
+//   render() {
+//     const { flag1,flag2,username,password } = this.state;
+    
+//     // const {  } = this.props.form;
+
+
+//     return (
+//       <div className={styles.body} style={{ width: '100%', height: '100%' }}>
+//         <div style={{ marginLeft: '40%', marginBottom: '2%' }}>
+//           {/* <img src={require('../../assets/logo.png')} style={{ width: 268, height: 78 }}></img> */}
+//         </div>
+//         <div className={styles.content}>
+//           <p className={styles.title}>技改检修工程造价智能审查工具</p>
+
+//           <div style={{ width: '80%', height: '40%', margin: '0 auto' }}>
+//             <p className={styles.pa}><span>账号 </span><input type="text" onChange={(e)=>this.onInputUser(e)}/></p>
+//             <p className={styles.pa}><span>密码 </span><input type="password" onChange={(e)=>this.onInputPassword(e)}/></p>
+//             <button disable={flag1} onClick={this.login}>登录</button>
+//           </div>
+//        </div>
+//       </div>
+//     )
+//   }
+// }
+// export default login;

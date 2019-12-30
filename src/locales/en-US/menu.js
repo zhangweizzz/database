@@ -62,4 +62,6 @@ export default {
   'menu.mine.mine3': 'mine3',
   'menu.mine.mine4': 'mine4',
   'menu.mine.mine5': 'mine5',
+  "menu.engineering":"engineering",
+  "menu.engineering.engineering1":"engineering1"
 };

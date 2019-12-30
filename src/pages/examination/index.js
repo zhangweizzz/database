@@ -54,7 +54,7 @@ const columns = [
   {
     title: '报告下线',
     dataIndex: 'jixie',
-    render: (text, record) => <a href="/examination/detail">{record.jixies}</a>,
+    render: (text, record) => <a href="/examination/detail">{record.jixie}</a>,
   },
 ];
 const data = [
