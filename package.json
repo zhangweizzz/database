@@ -118,6 +118,8 @@
     "src/**/*.less",
     "config/**/*.js*",
     "scripts/**/*.js"
-  ],
-  "proxy": "http://huangzore.gz01.bdysite.com"
+  ]
+  
+ 
+
 }

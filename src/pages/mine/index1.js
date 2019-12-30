@@ -14,6 +14,7 @@ import {
   Button,
   Table,
   Card,
+  Modal
 } from 'antd';
 import styles from './index1.less';
 
@@ -70,20 +71,41 @@ class index1 extends Component {
     super();
     this.state = {
       flag: true,
-      bottom:'bottom'
+      bottom: 'bottom',
+      visible: false
     };
   }
-  
-  MyAccount=()=>{
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  MyAccount = () => {
     this.props.history.push('/mine/index2')//用户账户管理
   }
-  MyRoot=()=>{
+  MyRoot = () => {
     this.props.history.push('/mine/index3')//用户权限管理
   }
-  Dictionaries=()=>{
+  Dictionaries = () => {
     this.props.history.push('/mine/index4')//数据字典管理
   }
-  systemLog=()=>{
+  systemLog = () => {
     this.props.history.push('/mine/systemLog')//系统日志管理
   }
   render() {
@@ -122,9 +144,36 @@ class index1 extends Component {
             <p className={styles.p2}>99999@qq.com</p>
             <p className={styles.p2}>管理员</p>
             <p className={styles.p3}>
-              <Button>修改密码</Button>
+              <Button onClick={this.showModal}>修改密码</Button>
               <Button>切换用户</Button>
             </p>
+            <Modal
+              title="修改密码"
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+              closable={false}
+              keyboard={true}
+              centered={true}
+
+            >
+              <div className="homeinput">
+                <div className="homeinput-a">账户名：</div>
+                <div className="homeinput-b"><Input placeholder="东方月初" /></div>
+              </div>
+              <div className="homeinput">
+                <div className="homeinput-a">原始密码：</div>
+                <div className="homeinput-b"><Input type="password" value="123456" /></div>
+              </div>
+              <div className="homeinput">
+                <div className="homeinput-a">设置新密码：</div>
+                <div className="homeinput-b"><Input type="password" /></div>
+              </div>
+              <div className="homeinput">
+                <div className="homeinput-a">确认新密码：</div>
+                <div className="homeinput-b"><Input type="password" /></div>
+              </div>
+            </Modal>
           </div>
           <div className={styles.box2}>
             <Row gutter={10}>
@@ -140,7 +189,7 @@ class index1 extends Component {
                     color: 'white',
                   }}
                 >
-                  <div style={{ display: 'flex',justifyContent:'space-around' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                     <div className={styles.litterBox}>
                       <p>用户账户管理</p>
                       <img
@@ -204,7 +253,7 @@ class index1 extends Component {
                       >
                         管理
                       </Button>
-                    </div>                    
+                    </div>
                   </div>
                 </Card>
               </Col>
@@ -220,7 +269,7 @@ class index1 extends Component {
               <Col>
                 <Card
                   title="操作记录"
-                  style={{ borderRadius: '20px', height: 40,padding:0 }}
+                  style={{ borderRadius: '20px', height: 40, padding: 0 }}
                   bordered={false}
                   headStyle={{
                     background: '#2FBBB8',
@@ -230,7 +279,7 @@ class index1 extends Component {
                   }}
                 >
                 </Card>
-                  <Table columns={columns} dataSource={data} bordered/>
+                <Table columns={columns} dataSource={data} bordered />
               </Col>
             </Row>
           </div>

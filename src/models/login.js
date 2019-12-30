@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
-import { loginIn } from '@/services/login';
+import { loginIn,zidian } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
@@ -14,6 +14,13 @@ export default {
   },
 
   effects: {
+    *shujuzidian({payload},{call,put}){
+      const response = yield call(login,payload);
+      yield put({
+        type:'zidian'
+      })
+    },
+
     *loginInFetch({ payload }, { call, put }){
       const response = yield call(loginIn, payload);
       if(response&&response.loginStatus === 1){
@@ -75,14 +82,12 @@ export default {
   },
 
   reducers: {
-    // changeLoginStatus(state, { payload }) {
-    //   setAuthority(payload.currentAuthority);
-    //   return {
-    //     ...state,
-    //     status: payload.status,
-    //     type: payload.type,
-    //   };
-    // },
+    zidian(state, action) {
+      return {
+        ...state,
+        list: action.payload,
+      };
+    },  
   },
 };
 

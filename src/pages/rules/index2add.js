@@ -320,7 +320,7 @@ class index2 extends Component {
                 >
                   重置
                 </Button>
-              </li>              
+              </li>   
             </ul>
             <Table
               columns={columns2}
@@ -328,6 +328,7 @@ class index2 extends Component {
               bordered
               style={{ marginTop: '50px' }}
             />
+            
           </div>
         )}
       </div>

@@ -1,3 +1,4 @@
+import styles from './pricing.less';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import {
@@ -12,6 +13,7 @@ import {
   InputNumber,
   Button,
   Table,
+  Upload
 } from 'antd';
 
 const { SubMenu } = Menu;
@@ -19,8 +21,24 @@ const { Header, Content, Sider } = Layout;
 const InputGroup = Input.Group;
 const { Option } = Select;
 // import styles from "../dashboard/quota.less";
-import styles from './pricing.less';
 
+const props = {
+  name: 'file',
+  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  headers: {
+    authorization: 'authorization-text',
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
 class index extends Component {
   constructor() {
     super();
@@ -212,6 +230,7 @@ class index extends Component {
               </Button>
             </li>
             <li>
+            <Upload {...props} style={{ float: "left" }}>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -224,6 +243,7 @@ class index extends Component {
               >
                 导入
               </Button>
+              </Upload>
             </li>
             <li>
               <Button

@@ -216,7 +216,7 @@ class index extends Component {
                 重置
               </Button>
             </li>
-            <li>
+            {/* <li>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -229,8 +229,8 @@ class index extends Component {
               >
                 新建
               </Button>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -243,8 +243,8 @@ class index extends Component {
               >
                 导入
               </Button>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -257,8 +257,8 @@ class index extends Component {
               >
                 导出
               </Button>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -271,7 +271,7 @@ class index extends Component {
               >
                 删除
               </Button>
-            </li>
+            </li> */}
           </ul>
           <Table
             // rowSelection={rowSelection}

@@ -14,3 +14,6 @@ export async function loginIn(params) {
 export async function getFakeCaptcha(mobile) {
   return request(`/api/login/captcha?mobile=${mobile}`);
 }
+export async function zidian(param) { 
+  return request('http://192.168.3.111:8081/power/dictType/save');
+ }

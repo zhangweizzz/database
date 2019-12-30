@@ -12,6 +12,7 @@ import {
   InputNumber,
   Button,
   Table,
+  Modal
 } from 'antd';
 import styles from './pricing2.less';
 
@@ -26,9 +27,29 @@ class index2 extends Component {
     this.state = {
       flag: false,
       checkState: true,//修改默认禁用
-      delState: true//删除默认禁用
+      delState: true,//删除默认禁用
+      visible: false
     };
   }
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
   card1 = () => {
     this.setState({
       flag: true,
@@ -292,6 +313,7 @@ class index2 extends Component {
                   height: '80%',
                   width: '100%',
                 }}
+                onClick={this.showModal}
                 disabled={delState}
               >
                 删除
@@ -307,6 +329,14 @@ class index2 extends Component {
             />
           </div>
         </div>
+        <Modal
+          title="删除提示"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <p>您确定要删除此信息价库吗？</p>
+        </Modal>
       </div>
     );
   }

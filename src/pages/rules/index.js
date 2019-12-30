@@ -12,7 +12,8 @@ import {
   InputNumber,
   Button,
   Table,
-  Radio
+  Radio,
+  Modal
 } from 'antd';
 import styles from './index.less';
 import { normalizeUnits } from 'moment';
@@ -161,9 +162,50 @@ class index2 extends Component {
     this.state = {
       flag: true,
       checkState: true,//修改默认禁用
-      delState: true//删除默认禁用
+      delState: true,//删除默认禁用
+      visible: false
     };
   }
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+  showModal2 = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk2 = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel2 = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
   onChange = e => {
     console.log('radio checked', e.target.value);
     this.setState({
@@ -184,7 +226,7 @@ class index2 extends Component {
     this.props.history.push('/rules/indexadd');
   }
   modify = () => {//工程量审查修改
-      this.props.history.push('/rules/indexmodify');
+    this.props.history.push('/rules/indexmodify');
   }
   addGC2 = () => {//工程规则新增
     this.props.history.push('/rules/indexaddGC');
@@ -193,27 +235,27 @@ class index2 extends Component {
     this.props.history.push('/rules/indexmodifyGC');
   }
   render() {
-    const { flag,checkState,delState } = this.state;
+    const { flag, checkState, delState, visible } = this.state;
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
         // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-        console.log(selectedRowKeys,selectedRows);
+        console.log(selectedRowKeys, selectedRows);
         if (selectedRowKeys.length == 1) {
           this.setState({
             checkState: false,//修改按钮
-            delState:false//删除按钮
+            delState: false//删除按钮
           })
-        } else if(selectedRowKeys.length>1){
+        } else if (selectedRowKeys.length > 1) {
           this.setState({
             checkState: true,//修改按钮
-            delState:false//删除按钮
+            delState: false//删除按钮
           })
-        }else {
+        } else {
           this.setState({
-           checkState:true,
-           delState:true
-         })
-     }
+            checkState: true,
+            delState: true
+          })
+        }
       },
       getCheckboxProps: record => ({
         disabled: record.name === 'Disabled User', // Column configuration not to be checked
@@ -250,7 +292,7 @@ class index2 extends Component {
             </Breadcrumb.Item>
           </Breadcrumb>
         </div>
-        {/* 取费表 */}
+        {/* 工程量审查 */}
         {flag && (
           <div className={styles.content}>
             <div className={styles.bt}>
@@ -360,7 +402,7 @@ class index2 extends Component {
                     height: '80%',
                     width: '100%',
                   }}
-                  onClick={()=>this.modify()}
+                  onClick={() => this.modify()}
                   disabled={checkState}
                 >
                   修改
@@ -377,6 +419,7 @@ class index2 extends Component {
                     width: '100%',
                   }}
                   disabled={delState}
+                  onClick={this.showModal}
                 >
                   删除
                 </Button>
@@ -389,6 +432,14 @@ class index2 extends Component {
               bordered
               style={{ marginTop: '50px' }}
             />
+            <Modal
+              title="删除提示"
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+            >
+              <p>（工程量）确认删除？</p>
+            </Modal>
           </div>
         )}
         {/* 工程量审查规则库 */}
@@ -585,6 +636,7 @@ class index2 extends Component {
                     width: '100%',
                   }}
                   disabled={delState}
+                  onClick={this.showModal2}
                 >
                   删除
                 </Button>
@@ -597,6 +649,14 @@ class index2 extends Component {
               bordered
               style={{ marginTop: '50px' }}
             />
+            <Modal
+              title="删除提示"
+              visible={this.state.visible}
+              onOk={this.handleOk2}
+              onCancel={this.handleCancel2}
+            >
+              <p>（工程量规则）确认删除？</p>
+            </Modal>
           </div>
         )}
       </div>

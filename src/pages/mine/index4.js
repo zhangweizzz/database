@@ -70,13 +70,40 @@ const data = [
 // function handleChange(value) {
 //   console.log(`selected ${value}`);
 // }
+
+@connect(({ shujuzidian}) => ({
+  shujuzidian,
+}))
 class index3 extends Component {
+
+ 
   constructor() {
     super();
     this.state = {
       flag: true,
       value: 1,
+    
+   
+      
     };
+  }
+	componentDidMount() {
+		new Promise(resolve => {
+			this.props.dispatch({
+				type: 'shujuzidian/basicList',
+				payload:{
+          resolve
+        }
+			})
+		}).then((res) => {
+		
+      console.log(res);
+		});
+	}
+
+  shujuzidian=()=>{
+    console.log(111)
+
   }
 
   handleChange=(value)=> {
@@ -141,6 +168,7 @@ class index3 extends Component {
                   marginLeft: 0,
                   marginBottom:'2%'
                 }}
+                onClick={this.shujuzidian}
               >新建</Button>
             <Table
               columns={columns}

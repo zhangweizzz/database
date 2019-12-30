@@ -13,6 +13,7 @@ import {
   Button,
   Table,
   Radio,
+  Modal
 } from 'antd';
 import styles from './index3.less';
 
@@ -95,9 +96,29 @@ class index3 extends Component {
       flag: true,
       value: 1,
       checkState: true,//修改默认禁用
-      delState: true//删除默认禁用
+      delState: true,//删除默认禁用
+      visible: false
     };
   }
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
 
   onChange = e => {
     console.log('radio checked', e.target.value);
@@ -113,27 +134,27 @@ class index3 extends Component {
     this.props.history.push('/rules/index3modify');
   };
   render() {
-    const { flag,checkState,delState } = this.state;
+    const { flag, checkState, delState } = this.state;
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
         // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-        console.log(selectedRowKeys,selectedRows);
+        console.log(selectedRowKeys, selectedRows);
         if (selectedRowKeys.length == 1) {
           this.setState({
             checkState: false,//修改按钮
-            delState:false//删除按钮
+            delState: false//删除按钮
           })
-        } else if(selectedRowKeys.length>1){
+        } else if (selectedRowKeys.length > 1) {
           this.setState({
             checkState: true,//修改按钮
-            delState:false//删除按钮
+            delState: false//删除按钮
           })
-        }else {
+        } else {
           this.setState({
-           checkState:true,
-           delState:true
-         })
-     }
+            checkState: true,
+            delState: true
+          })
+        }
       },
       getCheckboxProps: record => ({
         disabled: record.name === 'Disabled User', // Column configuration not to be checked
@@ -173,31 +194,31 @@ class index3 extends Component {
             <p className={styles.contentp}></p> <h2>条件查询 :</h2>
           </div>
           <Row>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
               <div className={styles.box}>物料编号:</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
               <div className={styles.box}>物料名称:</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
               <div className={styles.box}>单价(含税):</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
               <div className={styles.box}>单&emsp;&emsp;价:</div>{' '}
               <div className={styles.pox}>
                 <Input style={{ height: '40px', width: '100%' }} placeholder="请输入" />
               </div>
             </Col>
-            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
               <div className={styles.box}>是否常见物料:</div>{' '}
               <div className={styles.pox}>
                 <Radio.Group onChange={this.onChange} value={this.state.value}>
@@ -206,7 +227,7 @@ class index3 extends Component {
                 </Radio.Group>
               </div>
             </Col>
-            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
               <div className={styles.box}>有效期限:</div>
               <div className={styles.pox}>
                 <InputGroup size="large" compact style={{ height: '50px', width: '220px' }}>
@@ -217,7 +238,7 @@ class index3 extends Component {
                 </InputGroup>
               </div>
             </Col>
-            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{display:'flex',justifyContent:'space-between',width:'20%'}}>
+            <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }} style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
               <div className={styles.box}>结束期限:</div>
               <div className={styles.pox}>
                 <InputGroup size="large" compact style={{ height: '50px', width: '220px' }}>
@@ -293,7 +314,6 @@ class index3 extends Component {
             </li>
             <li>
               <Button
-                onClick={this.cz}
                 type="primary"
                 htmlType="submit"
                 style={{
@@ -302,6 +322,7 @@ class index3 extends Component {
                   height: '80%',
                   width: '100%',
                 }}
+                onClick={this.showModal}
                 disabled={delState}
               >
                 删除
@@ -315,6 +336,14 @@ class index3 extends Component {
             bordered
             style={{ marginTop: '50px' }}
           />
+          <Modal
+            title="删除提示"
+            visible={this.state.visible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+          >
+            <p>（物料删除）确认删除？</p>
+          </Modal>
         </div>
       </div>
     );

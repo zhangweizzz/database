@@ -13,6 +13,7 @@ import {
   InputNumber,
   Button,
   Table,
+  Modal
 } from 'antd';
 import styles from './index2.less';
 
@@ -106,22 +107,44 @@ const data2 = [
     cp: '关联项目',
   },
 ];
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  getCheckboxProps: record => ({
-    disabled: record.name === 'Disabled User', // Column configuration not to be checked
-    name: record.name,
-  }),
-};
+// const rowSelection = {
+//   onChange: (selectedRowKeys, selectedRows) => {
+//     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+//   },
+//   getCheckboxProps: record => ({
+//     disabled: record.name === 'Disabled User', // Column configuration not to be checked
+//     name: record.name,
+//   }),
+// };
 class index2 extends Component {
   constructor() {
     super();
     this.state = {
       flag: true,
+      checkState: true,//修改默认禁用
+      delState: true,//删除默认禁用 
+      visible: false
     };
   }
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
   card1 = () => {
     this.setState({
       flag: true,
@@ -141,7 +164,33 @@ class index2 extends Component {
     this.props.history.push('/rules/index2add');
   };
   render() {
-    const { flag } = this.state;
+    const { flag, checkState, delState, visible } = this.state;
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        console.log(selectedRowKeys, selectedRows);
+        if (selectedRowKeys.length == 1) {
+          this.setState({
+            checkState: false,//修改按钮
+            delState: false//删除按钮
+          })
+        } else if (selectedRowKeys.length > 1) {
+          this.setState({
+            checkState: true,//修改按钮
+            delState: false//删除按钮
+          })
+        } else {
+          this.setState({
+            checkState: true,
+            delState: true
+          })
+        }
+      },
+      getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User', // Column configuration not to be checked
+        name: record.name,
+      }),
+    };
 
     return (
       <div>
@@ -289,6 +338,8 @@ class index2 extends Component {
                     height: '80%',
                     width: '100%',
                   }}
+                  disabled={delState}
+                  onClick={this.showModal}
                 >
                   删除
                 </Button>
@@ -301,6 +352,14 @@ class index2 extends Component {
               bordered
               style={{ marginTop: '50px' }}
             />
+            <Modal
+              title="删除提示"
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+            >
+              <p>（取费表）确认删除？</p>
+            </Modal>
           </div>
         )}
         {/* 取费规则 */}

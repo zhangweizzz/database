@@ -190,6 +190,10 @@ export default {
                   component: '../pages/rules/index2',
                 },
                 {
+                  path: '/rules/index2detail', //index2项目详情页
+                  component: '../pages/rules/index2detail',
+                },
+                {
                   path: '/rules/index2add', //新建页
                   component: '../pages/rules/index2add',
                 },
