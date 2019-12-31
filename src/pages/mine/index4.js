@@ -88,17 +88,24 @@ class index3 extends Component {
     };
   }
 	componentDidMount() {
-		new Promise(resolve => {
-			this.props.dispatch({
-				type: 'shujuzidian/basicList',
-				payload:{
-          resolve
-        }
-			})
-		}).then((res) => {
+		// new Promise(resolve => {
+		// 	this.props.dispatch({
+		// 		type: 'shujuzidian/basicList',
+		// 		payload:{
+    //       resolve
+    //     }
+		// 	})
+		// }).then((res) => {
 		
-      console.log(res);
-		});
+    //   console.log(res);
+    // });
+    this.props.dispatch({
+      type: 'shujuzidian/basicList',
+      payload: {
+        pageNum: 1,
+        pageSize: 5,
+      },
+    });
 	}
 
   shujuzidian=()=>{

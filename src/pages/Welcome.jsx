@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { FormattedMessage } from 'umi-plugin-react/locale';
-import { Card, Typography, Alert, Button, Col, Row, List, Modal,Input } from 'antd';
+import { Card, Typography, Alert, Button, Col, Row, List, Modal,Input,Tabs,Radio  } from 'antd';
 import styles from './Welcome.less';
 // import styles from './Welcome.css';
 
@@ -61,12 +61,18 @@ const zdata = [
   },
 ];
 
+const { TabPane } = Tabs;
 
+function callback(key) {
+  console.log(key);
+}
 class Welcome extends Component {
  
 state = {
    visible: false, 
-    goModal:false
+    goModal:false,
+    start: false,
+    value: 1,
   };
 showModal = () => {
   this.setState({
@@ -79,6 +85,11 @@ goModal = () => {
     goModal:true,
   });
 };
+startModel = () =>{
+  this.setState({
+    start:true,
+  })
+}
 backModal = e => {
   console.log(e);
   this.setState({
@@ -92,6 +103,11 @@ handback= e => {
     goModal:false,
   });
 };
+endModel = e =>{
+  this.setState({
+    start:false,
+  })
+}
 
 
 
@@ -108,6 +124,18 @@ handleCancel = e => {
     visible: false,
   });
 };
+ppModel = e=>{
+  console.log(e);
+  this.setState({
+    start: false,
+  });
+}
+onChange = e => {
+  console.log('radio checked', e.target.value);
+  this.setState({
+    value: e.target.value,
+  });
+};
 
 
   render(){
@@ -116,9 +144,71 @@ handleCancel = e => {
 
 
       <div className="home">
-        <Button block style={{ height: '50px', background: '#2FBBB8' }}>
+        <Button 
+        block 
+        style={{ height: '50px', background: '#2FBBB8' }}
+        onClick={this.startModel}
+        >
           开始功能审查
         </Button>
+        <Modal
+         
+          visible={this.state.start}
+          onOk={this.ppModel}
+          onCancel={this.endModel}
+          closable={false}
+          keyboard={true}
+          centered={true}
+        >
+           <Tabs defaultActiveKey="2" onChange={callback}>
+    <TabPane tab="新建项目" key="1">
+      <div className={styles.tabone}>
+      <p>项目分类:</p> <div><Radio.Group onChange={this.onChange} value={this.state.value}>
+        <Radio value={1}>技改项目</Radio>
+        <Radio value={2}>检修项目</Radio>
+      </Radio.Group></div>
+      </div>
+      <div className={styles.tabtwo}>
+          <p>项目名称</p><p><Input value="220kv变电站工程-2019/12/25"/></p>
+      </div>
+      <div className={styles.pathree}>
+          <p>公司名称:</p><p><Input value="武汉中天弘信科技有限公司" /></p><p>项目编号</p><p><Input value="JG-0100020191225" /></p>
+        </div>
+        <div className={styles.pathree}>
+          <p>公司名称:</p><p><Input value="武汉中天弘信科技有限公司" /></p><p>项目编号</p><p><Input value="JG-0100020191225" /></p>
+        </div>
+        <div className={styles.pathree}>
+          <p>公司名称:</p><p><Input value="武汉中天弘信科技有限公司" /></p><p>项目编号</p><p><Input value="JG-0100020191225" /></p>
+        </div>
+        <div className={styles.pathree}>
+          <p>公司名称:</p><p><Input value="武汉中天弘信科技有限公司" /></p><p>项目编号</p><p><Input value="JG-0100020191225" /></p>
+        </div>
+    </TabPane>
+    <TabPane tab="原有项目" key="2">
+        <div className={styles.pabone}>
+            <p>历史项目选择项：</p><p><Input value="220kv变电站工程-2019/12/25"/></p><p><Button>查询</Button></p>
+        </div>
+        <div className={styles.patwo}>
+          <p>项目名称</p><p><Input value="220kv变电站工程-2019/12/25"/></p>
+        </div>
+        <div className={styles.pathree}>
+          <p>公司名称:</p><p><Input value="武汉中天弘信科技有限公司" /></p><p>项目编号</p><p><Input value="JG-0100020191225" /></p>
+        </div>
+        <div className={styles.pathree}>
+          <p>公司名称:</p><p><Input value="武汉中天弘信科技有限公司" /></p><p>项目编号</p><p><Input value="JG-0100020191225" /></p>
+        </div>
+        <div className={styles.pathree}>
+          <p>公司名称:</p><p><Input value="武汉中天弘信科技有限公司" /></p><p>项目编号</p><p><Input value="JG-0100020191225" /></p>
+        </div>
+        <div className={styles.pathree}>
+          <p>公司名称:</p><p><Input value="武汉中天弘信科技有限公司" /></p><p>项目编号</p><p><Input value="JG-0100020191225" /></p>
+        </div>
+       
+    </TabPane>
+    
+  </Tabs>,
+          
+        </Modal>
         <div style={{ background: '#f1f3f5', padding: '30px', marginTop: '30px' }}>
           <Row gutter={16}>
             <Col span={12}>

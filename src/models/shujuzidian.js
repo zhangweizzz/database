@@ -15,14 +15,14 @@ export default {
     },
     effects:{
         *basicList({payload},{call,put}){
-          const {resolve} = payload
-            const response=yield call(BaseList,payload)
+          // const {resolve} = payload
+            const response=yield call(BaseList,payload);
             if(response&&response.success){
               resolve({data:response.map})
+              // resolve(response.map)
               }
               yield put({
-                type:'comList',
-                
+                type:'comList',       
               })
             }
           },
