@@ -118,14 +118,6 @@
     "src/**/*.less",
     "config/**/*.js*",
     "scripts/**/*.js"
-  ],
-  "proxy": {
-    "/power": {
-      "target": "http://192.168.0.106:8081/power",
-      "ws": true
-    }
-  }
-  
- 
+  ]
 
 }

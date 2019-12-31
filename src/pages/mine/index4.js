@@ -82,9 +82,10 @@ class index3 extends Component {
     this.state = {
       flag: true,
       value: 1,
-    
-   
-      
+      data:{
+        page:'1',
+        pageSize:'10'
+      } 
     };
   }
 	componentDidMount() {
@@ -102,8 +103,7 @@ class index3 extends Component {
     this.props.dispatch({
       type: 'shujuzidian/basicList',
       payload: {
-        pageNum: 1,
-        pageSize: 5,
+        data:this.state.data
       },
     });
 	}
